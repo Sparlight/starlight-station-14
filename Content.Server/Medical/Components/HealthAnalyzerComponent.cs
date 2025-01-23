@@ -1,5 +1,6 @@
 using Robust.Shared.Audio;
 using Content.Shared.Damage.Prototypes;
+using Content.Server.AbstractAnalyzer;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using Robust.Shared.Prototypes; //FarHorizons

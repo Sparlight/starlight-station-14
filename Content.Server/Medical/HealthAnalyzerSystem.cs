@@ -1,5 +1,7 @@
 using System.Linq; // Starlight-edit
 using Content.Server.Chat.Systems; // Starlight-edit
+using System.Diagnostics.CodeAnalysis;
+using Content.Server.AbstractAnalyzer;
 using Content.Server.Medical.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -524,7 +526,7 @@ public sealed class HealthAnalyzerSystem : AbstractAnalyzerSystem<HealthAnalyzer
         return HealthAnalyzerUiKey.Key;
     }
 
-    protected override bool ScanTargetPopupMessage(Entity<HealthAnalyzerComponent> uid, AfterInteractEvent args, out string message)
+    protected override bool ScanTargetPopupMessage(Entity<HealthAnalyzerComponent> uid, AfterInteractEvent args, [NotNullWhen(true)] out string? message)
     {
         message = Loc.GetString("health-analyzer-popup-scan-target", ("user", Identity.Entity(args.User, EntityManager)));
         return true;
