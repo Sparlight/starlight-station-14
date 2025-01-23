@@ -13,9 +13,6 @@ using Content.Shared.Humanoid; // Starlight-edit
 using Content.Shared.Humanoid.Prototypes; // Starlight-edit
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Item.ItemToggle;
-using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.MedicalScanner;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Paper; // Starlight-edit
@@ -35,7 +32,8 @@ using Content.Shared._Starlight.Medical;
 
 namespace Content.Server.Medical;
 
-public sealed partial class HealthAnalyzerSystem : EntitySystem
+public sealed class HealthAnalyzerSystem : AbstractAnalyzerSystem<HealthAnalyzerComponent, HealthAnalyzerDoAfterEvent>
+//public sealed partial class HealthAnalyzerSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private PowerCellSystem _cell = default!;
@@ -520,4 +518,20 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
 
     private sealed record HealthAnalyzerDamageTypeSnapshot(string Name, FixedPoint2 Amount);
     // Starlight-end
+
+    protected override Enum GetUiKey()
+    {
+        return HealthAnalyzerUiKey.Key;
+    }
+
+    protected override bool ScanTargetPopupMessage(Entity<HealthAnalyzerComponent> uid, AfterInteractEvent args, out string message)
+    {
+        message = Loc.GetString("health-analyzer-popup-scan-target", ("user", Identity.Entity(args.User, EntityManager)));
+        return true;
+    }
+
+    protected override bool ValidScanTarget(EntityUid? target)
+    {
+        return HasComp<MobStateComponent>(target);
+    }
 }
