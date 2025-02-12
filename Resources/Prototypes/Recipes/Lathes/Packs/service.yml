@@ -43,6 +43,16 @@
   - PersonalCircuitboardDesktop #Starlight
   - TP14DeepFryerCircuitboardRecipe #starlight/tp14 port
 
+- type: latheRecipePack
+  id: HydroponicsStatic
+  recipes:
+  - HydroponicsToolMiniHoe
+  - HydroponicsToolScythe
+  - HydroponicsToolHatchet
+  - HydroponicsToolSpade
+  - HydroponicsToolClippers
+  - PlantAnalyzer
+
 ## Dynamic
 
 - type: latheRecipePack
