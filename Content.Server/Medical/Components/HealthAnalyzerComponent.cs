@@ -1,3 +1,4 @@
+using Content.Shared.AbstractAnalyzer;
 using Robust.Shared.Audio;
 using Content.Shared.Damage.Prototypes;
 using Content.Server.AbstractAnalyzer;

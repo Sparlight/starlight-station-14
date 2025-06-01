@@ -1,7 +1,6 @@
 using System.Linq; // Starlight-edit
 using Content.Server.Chat.Systems; // Starlight-edit
 using System.Diagnostics.CodeAnalysis;
-using Content.Server.AbstractAnalyzer;
 using Content.Server.Medical.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -22,6 +21,7 @@ using Content.Shared.Popups;
 using Content.Shared.PowerCell;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Traits.Assorted;
+using Content.Shared.AbstractAnalyzer;
 using Content.Shared._Starlight.Time; // Starlight-edit
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
