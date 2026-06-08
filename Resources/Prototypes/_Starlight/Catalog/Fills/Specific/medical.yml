@@ -89,6 +89,18 @@
         tableId: RandomInjectorSafeTable
         rolls: !type:RangeNumberSelector
           range: 2, 4
+          
+- type: entity
+  id: PenPackEMTFilled
+  parent: PenPackMedical
+  suffix: Paramedic, Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+          - id: EmergencyMedipen
+            amount: 3
 
 - type: entity
   id: PenPackSecurityFilled

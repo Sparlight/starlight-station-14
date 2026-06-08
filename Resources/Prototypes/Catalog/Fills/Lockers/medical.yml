@@ -145,10 +145,10 @@
     children:
     - id: ClothingEyesHudMedical
     - id: ClothingOuterHardsuitVoidParamed
-    - id: ClothingBeltMedicalEMTFilled
+    # - id: ClothingBeltMedicalEMTFilled # Starlight - this locker belongs to parameds anyway, they'll have a belt when joining. Powergame loot bait.
     - id: JetInjector
     - id: EmergencyHandheldCrewMonitor # Starlight
-    - id: JawsOfLifeMed # Starlight
+    # - id: JawsOfLifeMed # Starlight - keeps getting powergamed by non-parameds, moved to loadout
     - id: BottleCaseParamedicFilled # Starlight, they don't get the pen pouch, they already get a ton of their own special toys.
     # - id: HandheldHealthAnalyzer Starlight - kind of just junk in the locker at this point, use your PDA or get one at a nanomed
     - id: BoxBodyBag

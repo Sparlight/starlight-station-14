@@ -325,8 +325,7 @@
       - !type:GamemodeCondition
         presets:
         - Greenshift
-        - Sandbox
-    - id: JawsOfLifeMed #Starlight end
+        - Sandbox #Starlight end
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

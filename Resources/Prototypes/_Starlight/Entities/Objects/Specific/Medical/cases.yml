@@ -83,6 +83,9 @@
   - type: PhysicalComposition
     materialComposition:
       Cloth: 100
+  - type: Tag
+    tags:
+    - PenPack
 
 - type: entity
   abstract: true

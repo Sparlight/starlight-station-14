@@ -130,9 +130,12 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MedkitFilledParamed # Starlight start
+        - id: Brutepack # Starlight start
+        - id: Ointment
+        - id: Gauze
         - id: RescueKnife # Starlight
         - id: BodyBagLockableFolded # Starlight
+        - id: JawsOfLifeMed # Starlight
         # Reagents focused on emergency response rather than outright healing
         # - id: ChemistryBottleInaprovaline - moved to locker chem case
         #   amount: 2

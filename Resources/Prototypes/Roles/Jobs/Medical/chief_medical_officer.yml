@@ -47,6 +47,7 @@
   storage:
     back:
     - Flash
+    - JawsOfLifeMed # Starlight
 
 - type: chameleonOutfit
   id: ChiefMedicalOfficerChameleonOutfit
