@@ -79,16 +79,16 @@
         - id: ChemistryBottleEthylredoxrazine
 
 - type: entity
-  id: PenPackEMTFilled
+  id: PenPackMedicalFilled
   parent: PenPackMedical
-  suffix: Paramedic, Filled
+  suffix: Medical, Filled
   components:
   - type: EntityTableContainerFill
     containers:
-      storagebase: !type:AllSelector
-        children:
-          - id: EmergencyMedipen
-            amount: 3
+      storagebase: !type:NestedSelector
+        tableId: RandomInjectorSafeTable
+        rolls: !type:RangeNumberSelector
+          range: 2, 4
 
 - type: entity
   id: PenPackSecurityFilled
