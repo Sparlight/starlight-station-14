@@ -473,9 +473,6 @@
   id: PatchPack
 
 - type: Tag
-  id: PenPack
-
-- type: Tag
   id: PersonnelStorage
 
 - type: Tag
