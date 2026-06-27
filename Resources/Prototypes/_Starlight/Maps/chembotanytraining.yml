@@ -1,0 +1,20 @@
+- type: gameMap
+  id: StarlightChemBotany
+  mapName: 'Chemistry and Botany Training Zone'
+  mapPath: /Maps/_Starlight/Stations/ChemBotanyTraining.yml
+  minPlayers: 1
+  maxPlayers: 12
+  stations:
+    StarlightChemBotany:
+      stationProto: StandardNanotrasenStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Chemistry and Botany Training Zone {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/_Starlight/Shuttles/emergency_lox.yml
+        - type: StationJobs
+          availableJobs:
+            Assistant: [ -1, -1 ]
