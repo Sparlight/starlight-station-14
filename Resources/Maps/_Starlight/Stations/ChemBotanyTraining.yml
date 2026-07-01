@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 06/27/2026 15:47:21
-  entityCount: 2197
+  time: 07/01/2026 00:02:47
+  entityCount: 2201
 maps:
 - 274
 grids:
@@ -4548,6 +4548,28 @@ entities:
     components:
     - type: Transform
       pos: -9.5,-2.5
+      parent: 1
+- proto: ChemistryHotplate
+  entities:
+  - uid: 2198
+    components:
+    - type: Transform
+      pos: 8.5,10.5
+      parent: 1
+  - uid: 2199
+    components:
+    - type: Transform
+      pos: 8.5,4.5
+      parent: 1
+  - uid: 2200
+    components:
+    - type: Transform
+      pos: 14.5,4.5
+      parent: 1
+  - uid: 2201
+    components:
+    - type: Transform
+      pos: 14.5,10.5
       parent: 1
 - proto: ChemistryPDA
   entities:
@@ -11875,22 +11897,22 @@ entities:
   - uid: 2187
     components:
     - type: Transform
-      pos: 8.5,4.5
+      pos: 9.503679,4.516826
       parent: 1
   - uid: 2188
     components:
     - type: Transform
-      pos: 14.5,4.5
+      pos: 15.502638,4.512185
       parent: 1
   - uid: 2189
     components:
     - type: Transform
-      pos: 14.5,10.5
+      pos: 15.471388,10.56599
       parent: 1
   - uid: 2190
     components:
     - type: Transform
-      pos: 8.5,10.5
+      pos: 9.482846,10.534462
       parent: 1
 - proto: VendingMachineRestockNutriMax
   entities:
