@@ -1,0 +1,814 @@
+- type: entity
+  abstract: true
+  id: DogCollarMixin
+  components:
+  - type: SuitSensor
+    controlsLocked: false
+    randomMode: false
+    mode: SensorCords
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    transmitFrequencyId: SuitSensor
+    savableAddress: false
+    range: 1200
+  - type: StationLimitedNetwork 
+  - type: WirelessNetworkConnection
+  - type: SyncIdNameToWearer
+
+- type: entity
+  id: !type:CreateVariants
+    values:
+    - AssistantCollarPDA
+    - TechnicalAssistantCollarPDA
+    - MedicalInternCollarPDA
+    - SecurityCadetCollarPDA
+    - ResearchAssistantCollarPDA
+    - ServiceWorkerCollarPDA
+    - ChefCollarPDA
+    - BotanistCollarPDA
+    - ClownCollarPDA
+    - MimeCollarPDA
+    - ChaplainCollarPDA
+    - QuartermasterCollarPDA
+    - CargoCollarPDA
+    - SalvageCollarPDA
+    - BartenderCollarPDA
+    - LibrarianCollarPDA
+    - LawyerCollarPDA
+    - JanitorCollarPDA
+    - CaptainCollarPDA
+    - HoPCollarPDA
+    - CECollarPDA
+    - EngineerCollarPDA
+    - CMOCollarPDA
+    - MedicalCollarPDA
+    - ParamedicCollarPDA
+    - ChemistryCollarPDA
+    - RnDCollarPDA
+    - ScienceCollarPDA
+    - HoSCollarPDA
+    - WardenCollarPDA
+    - SecurityCollarPDA
+    - CentcomCollarPDA
+    - MusicianCollarPDA
+    - AtmosCollarPDA
+    - ClearCollarPDA
+    - SyndiCollarPDA
+    - SyndiOperativeCollarPDA
+    - SyndiCorpsmanCollarPDA
+    - SyndiCommanderCollarPDA
+    - ERTLeaderCollarPDA
+    - ERTChaplainCollarPDA
+    - ERTEngineerCollarPDA
+    - ERTJanitorCollarPDA
+    - ERTMedicCollarPDA
+    - ERTSecurityCollarPDA
+    - CBURNCollarPDA
+    - PsychologistCollarPDA
+    - ReporterCollarPDA
+    - ZookeeperCollarPDA
+    - BoxerCollarPDA
+    - DetectiveCollarPDA
+    - BrigmedicCollarPDA
+    - SeniorEngineerCollarPDA
+    - SeniorResearcherCollarPDA
+    - SeniorPhysicianCollarPDA
+    - SeniorOfficerCollarPDA
+    - SeniorCourierCollarPDA
+    - NinjaCollarPDA
+    - PirateCollarPDA
+    - ChameleonAgentCollarPDA
+    - WizardCollarPDA
+    - ScurretCollarPDA
+    - SeniorChemistCollarPDA
+    - VeteranBrigmedicCollarPDA
+    - CorpsmanCollarPDA
+    - VeteranCorpsmanCollarPDA
+    - DutyOfficerCollarPDA
+    - MagistrateCollarPDA
+    - NanoTrasenRepresentativeCollarPDA
+    - CentCommOperatorCollarPDA
+    - IAACollarPDA
+    - BlueShieldCollarPDA
+    - VeteranBlueShieldCollarPDA
+    - AssistantManagerCollarPDA
+    - SalvageLeadCollarPDA
+    - VeteranSalvageLeadCollarPDA
+    - VeteranSalvageCollarPDA
+    - MiningCollarPDA
+    - VeteranMiningCollarPDA
+    - MailCollarPDA
+    - SeniorMailCollarPDA
+    - PerformerCollarPDA
+    - PunPunCollarPDA
+    - KikiCollarPDA
+    - StirStirCollarPDA
+    - PrisonerCollarPDA
+    - CommanderCollarPDA
+    - NTNCBlueShieldCollarPDA
+    - CentCommGreenShieldCollarPDA
+    - NTNCCSCollarPDA
+    - SeniorParamedicCollarPDA
+    - NanoTrasenCareerTrainerCollarPDA
+    - SolGovCollarPDA
+    - SolGovPDAOfficerCollarPDA
+    - SolGovPDAOfficerSheriffCollarPDA
+    - SolGovPDACrewCollarPDA
+    - SolGovPDAMarineCollarPDA
+    - SolGovPDASpecOpsCollarPDA
+    - BlackstarCollarPDA
+    - CluwneBeastCollarPDA
+    - CentCommServiceWorkerCollarPDA
+    - CentCommChefCollarPDA
+    - CentCommBartenderCollarPDA
+    - CentCommJanitorCollarPDA
+  parent: !type:CreateVariants
+    sequences:
+    - [ AssistantPDA, DogCollarMixin ]
+    - [ TechnicalAssistantPDA, DogCollarMixin ]
+    - [ MedicalInternPDA, DogCollarMixin ]
+    - [ SecurityCadetPDA, DogCollarMixin ]
+    - [ ResearchAssistantPDA, DogCollarMixin ]
+    - [ ServiceWorkerPDA, DogCollarMixin ]
+    - [ ChefPDA, DogCollarMixin ]
+    - [ BotanistPDA, DogCollarMixin ]
+    - [ ClownPDA, DogCollarMixin ]
+    - [ MimePDA, DogCollarMixin ]
+    - [ ChaplainPDA, DogCollarMixin ]
+    - [ QuartermasterPDA, DogCollarMixin ]
+    - [ CargoPDA, DogCollarMixin ]
+    - [ SalvagePDA, DogCollarMixin ]
+    - [ BartenderPDA, DogCollarMixin ]
+    - [ LibrarianPDA, DogCollarMixin ]
+    - [ LawyerPDA, DogCollarMixin ]
+    - [ JanitorPDA, DogCollarMixin ]
+    - [ CaptainPDA, DogCollarMixin ]
+    - [ HoPPDA, DogCollarMixin ]
+    - [ CEPDA, DogCollarMixin ]
+    - [ EngineerPDA, DogCollarMixin ]
+    - [ CMOPDA, DogCollarMixin ]
+    - [ MedicalPDA, DogCollarMixin ]
+    - [ ParamedicPDA, DogCollarMixin ]
+    - [ ChemistryPDA, DogCollarMixin ]
+    - [ RnDPDA, DogCollarMixin ]
+    - [ SciencePDA, DogCollarMixin ]
+    - [ HoSPDA, DogCollarMixin ]
+    - [ WardenPDA, DogCollarMixin ]
+    - [ SecurityPDA, DogCollarMixin ]
+    - [ CentcomPDA, DogCollarMixin ]
+    - [ MusicianPDA, DogCollarMixin ]
+    - [ AtmosPDA, DogCollarMixin ]
+    - [ ClearPDA, DogCollarMixin ]
+    - [ SyndiPDA, DogCollarMixin ]
+    - [ SyndiOperativePDA, DogCollarMixin ]
+    - [ SyndiCorpsmanPDA, DogCollarMixin ]
+    - [ SyndiCommanderPDA, DogCollarMixin ]
+    - [ ERTLeaderPDA, DogCollarMixin ]
+    - [ ERTChaplainPDA, DogCollarMixin ]
+    - [ ERTEngineerPDA, DogCollarMixin ]
+    - [ ERTJanitorPDA, DogCollarMixin ]
+    - [ ERTMedicPDA, DogCollarMixin ]
+    - [ ERTSecurityPDA, DogCollarMixin ]
+    - [ CBURNPDA, DogCollarMixin ]
+    - [ PsychologistPDA, DogCollarMixin ]
+    - [ ReporterPDA, DogCollarMixin ]
+    - [ ZookeeperPDA, DogCollarMixin ]
+    - [ BoxerPDA, DogCollarMixin ]
+    - [ DetectivePDA, DogCollarMixin ]
+    - [ BrigmedicPDA, DogCollarMixin ]
+    - [ SeniorEngineerPDA, DogCollarMixin ]
+    - [ SeniorResearcherPDA, DogCollarMixin ]
+    - [ SeniorPhysicianPDA, DogCollarMixin ]
+    - [ SeniorOfficerPDA, DogCollarMixin ]
+    - [ SeniorCourierPDA, DogCollarMixin ]
+    - [ NinjaPDA, DogCollarMixin ]
+    - [ PiratePDA, DogCollarMixin ]
+    - [ ChameleonAgentPDA, DogCollarMixin ]
+    - [ WizardPDA, DogCollarMixin ]
+    - [ ScurretPDA, DogCollarMixin ]
+    - [ SeniorChemistPDA, DogCollarMixin ]
+    - [ VeteranBrigmedicPDA, DogCollarMixin ]
+    - [ CorpsmanPDA, DogCollarMixin ]
+    - [ VeteranCorpsmanPDA, DogCollarMixin ]
+    - [ DutyOfficerPDA, DogCollarMixin ]
+    - [ MagistratePDA, DogCollarMixin ]
+    - [ NanoTrasenRepresentativePDA, DogCollarMixin ]
+    - [ CentCommOperatorPDA, DogCollarMixin ]
+    - [ IAAPDA, DogCollarMixin ]
+    - [ BlueShieldPDA, DogCollarMixin ]
+    - [ VeteranBlueShieldPDA, DogCollarMixin ]
+    - [ AssistantManagerPDA, DogCollarMixin ]
+    - [ SalvageLeadPDA, DogCollarMixin ]
+    - [ VeteranSalvageLeadPDA, DogCollarMixin ]
+    - [ VeteranSalvagePDA, DogCollarMixin ]
+    - [ MiningPDA, DogCollarMixin ]
+    - [ VeteranMiningPDA, DogCollarMixin ]
+    - [ MailPDA, DogCollarMixin ]
+    - [ SeniorMailPDA, DogCollarMixin ]
+    - [ PerformerPDA, DogCollarMixin ]
+    - [ PunPunPDA, DogCollarMixin ]
+    - [ KikiPDA, DogCollarMixin ]
+    - [ StirStirPDA, DogCollarMixin ]
+    - [ PrisonerPDA, DogCollarMixin ]
+    - [ CommanderPDA, DogCollarMixin ]
+    - [ NTNCBlueShieldPDA, DogCollarMixin ]
+    - [ CentCommGreenShieldPDA, DogCollarMixin ]
+    - [ NTNCCSPDA, DogCollarMixin ]
+    - [ SeniorParamedicPDA, DogCollarMixin ]
+    - [ NanoTrasenCareerTrainerPDA, DogCollarMixin ]
+    - [ SolGovPDA, DogCollarMixin ]
+    - [ SolGovPDAOfficer, DogCollarMixin ]
+    - [ SolGovPDAOfficerSheriff, DogCollarMixin ]
+    - [ SolGovPDACrew, DogCollarMixin ]
+    - [ SolGovPDAMarine, DogCollarMixin ]
+    - [ SolGovPDASpecOps, DogCollarMixin ]
+    - [ BlackstarPDA, DogCollarMixin ]
+    - [ CluwneBeastPDA, DogCollarMixin ]
+    - [ CentCommServiceWorkerPDA, DogCollarMixin ]
+    - [ CentCommChefPDA, DogCollarMixin ]
+    - [ CentCommBartenderPDA, DogCollarMixin ]
+    - [ CentCommJanitorPDA, DogCollarMixin ]
+  name: !type:CreateVariants
+    values:
+    - assistant collar
+    - technical assistant collar
+    - medical intern collar
+    - security cadet collar
+    - research assistant collar
+    - service worker collar
+    - chef collar
+    - botanist collar
+    - clown collar
+    - mime collar
+    - chaplain collar
+    - quartermaster collar
+    - cargo collar
+    - salvage collar
+    - bartender collar
+    - librarian collar
+    - lawyer collar
+    - janitor collar
+    - captain collar
+    - head of personnel collar
+    - chief engineer collar
+    - engineer collar
+    - chief medical officer collar
+    - medical collar
+    - paramedic collar
+    - chemist collar
+    - research director collar
+    - science collar
+    - head of security collar
+    - warden collar
+    - security collar
+    - CentComm collar
+    - musician collar
+    - atmos collar
+    - clear collar
+    - syndicate collar
+    - syndicate operative collar
+    - syndicate corpsman collar
+    - syndicate commander collar
+    - ERT leader collar
+    - ERT chaplain collar
+    - ERT engineer collar
+    - ERT janitor collar
+    - ERT medic collar
+    - ERT security collar
+    - CBURN collar
+    - psychologist collar
+    - reporter collar
+    - zookeeper collar
+    - boxer collar
+    - detective collar
+    - brigmedic collar
+    - senior engineer collar
+    - senior researcher collar
+    - senior physician collar
+    - senior officer collar
+    - senior courier collar
+    - ninja collar
+    - pirate collar
+    - chameleon agent collar
+    - wizard collar
+    - scurret collar
+    - senior chemist collar
+    - veteran brigmedic collar
+    - corpsman collar
+    - veteran corpsman collar
+    - duty officer collar
+    - magistrate collar
+    - NanoTrasen representative collar
+    - cent comm operator collar
+    - internal affairs agent collar
+    - blue shield collar
+    - veteran blue shield collar
+    - assistant manager collar
+    - salvage lead collar
+    - veteran salvage lead collar
+    - veteran salvage collar
+    - mining collar
+    - veteran mining collar
+    - mail collar
+    - senior mail collar
+    - performer collar
+    - pun pun's collar
+    - kiki's collar
+    - stir stir's collar
+    - prisoner collar
+    - commander collar
+    - naval officer's collar
+    - greenshield collar
+    - nt nc naval officer's collar
+    - senior paramedic collar
+    - NanoTrasen career trainer collar
+    - SolGov collar
+    - SolGov officer collar
+    - SolGov officer sheriff collar
+    - SolGov crew collar
+    - SolGov marine collar
+    - SolGov spec ops collar
+    - Blackstar collar
+    - cluwne collar
+    - CentComm service worker collar
+    - CentComm chef collar
+    - CentComm bartender collar
+    - CentComm janitor collar
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    layers:
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: pda
+      map: [ "enum.PdaVisualLayers.Base" ]
+    - map: [ "collarArt" ]
+      state: !type:CreateVariants
+        values:
+        - collar
+        - collar-interntech
+        - collar-internmed
+        - collar-interncadet
+        - collar-internsci
+        - collar-internservice
+        - collar-cook
+        - collar-hydro
+        - collar-clown
+        - collar-mime
+        - collar-chaplain
+        - collar-qm
+        - collar-cargo
+        - collar-miner
+        - collar-bartender
+        - collar-library
+        - collar-lawyer
+        - collar-janitor
+        - collar-captain
+        - collar-hop
+        - collar-ce
+        - collar-engineer
+        - collar-cmo
+        - collar-medical
+        - collar-paramedic
+        - collar-chemistry
+        - collar-rd
+        - collar-science
+        - collar-hos
+        - collar-warden
+        - collar-security
+        - collar-centcom
+        - collar-musician
+        - collar-atmos
+        - collar-clear
+        - collar-syndi
+        - collar-syndi-operative
+        - collar-syndi-corpsman
+        - collar-syndi-commander
+        - collar-ert
+        - collar-ert
+        - collar-ert
+        - collar-ert
+        - collar-ert
+        - collar-ert
+        - collar-ert
+        - collar-medical
+        - collar-reporter
+        - collar-zookeeper
+        - collar-boxer
+        - collar-detective
+        - collar-brigmedic
+        - collar-seniorengineer
+        - collar-seniorresearcher
+        - collar-seniorphysician
+        - collar-seniorofficer
+        - collar-seniorcourier
+        - collar-ninja
+        - collar-pirate
+        - collar
+        - collar-wizard
+        - collar-clear
+        - collar-seniorchemist
+        - collar-veteranbrigmedic
+        - collar-corpsman
+        - collar-veterancorpsman
+        - collar-dutyofficer
+        - collar-magi
+        - collar-ntrep
+        - collar-centcom
+        - collar-lawyer
+        - collar-blueshield
+        - collar-veteranblueshield
+        - collar-assistantmanager
+        - collar-salvagelead
+        - collar-veteransalvagelead
+        - collar-veteransalvage
+        - collar-mining
+        - collar-veteranmining
+        - collar-mailtech
+        - collar-seniormailtech
+        - collar-internservice
+        - collar-punpun
+        - collar-hydro
+        - collar-clear
+        - collar-clear
+        - collar-commander
+        - collar-blueshield
+        - collar-ntnc-cs
+        - collar-ntnc-cs
+        - collar-seniorparamedic
+        - collar-ntrep
+        - collar-solgov
+        - collar-solgov
+        - collar-solgov
+        - collar-solgov
+        - collar-solgov
+        - collar-solgov
+        - collar
+        - collar-cluwne
+        - collar-centcom
+        - collar-centcom
+        - collar-centcom
+        - collar-centcom
+    - sprite: Objects/Devices/pda.rsi
+      state: light_overlay
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: unshaded
+      visible: false
+    - sprite: Objects/Devices/pda.rsi
+      state: id_overlay
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    state: !type:CreateVariants
+      values:
+      - collar
+      - collar-interntech
+      - collar-internmed
+      - collar-interncadet
+      - collar-internsci
+      - collar-internservice
+      - collar-cook
+      - collar-hydro
+      - collar-clown
+      - collar-mime
+      - collar-chaplain
+      - collar-qm
+      - collar-cargo
+      - collar-miner
+      - collar-bartender
+      - collar-library
+      - collar-lawyer
+      - collar-janitor
+      - collar-captain
+      - collar-hop
+      - collar-ce
+      - collar-engineer
+      - collar-cmo
+      - collar-medical
+      - collar-paramedic
+      - collar-chemistry
+      - collar-rd
+      - collar-science
+      - collar-hos
+      - collar-warden
+      - collar-security
+      - collar-centcom
+      - collar-musician
+      - collar-atmos
+      - collar-clear
+      - collar-syndi
+      - collar-syndi-operative
+      - collar-syndi-corpsman
+      - collar-syndi-commander
+      - collar-ert
+      - collar-ert
+      - collar-ert
+      - collar-ert
+      - collar-ert
+      - collar-ert
+      - collar-ert
+      - collar-medical
+      - collar-reporter
+      - collar-zookeeper
+      - collar-boxer
+      - collar-detective
+      - collar-brigmedic
+      - collar-seniorengineer
+      - collar-seniorresearcher
+      - collar-seniorphysician
+      - collar-seniorofficer
+      - collar-seniorcourier
+      - collar-ninja
+      - collar-pirate
+      - collar
+      - collar-wizard
+      - collar-clear
+      - collar-seniorchemist
+      - collar-veteranbrigmedic
+      - collar-corpsman
+      - collar-veterancorpsman
+      - collar-dutyofficer
+      - collar-magi
+      - collar-ntrep
+      - collar-centcom
+      - collar-lawyer
+      - collar-blueshield
+      - collar-veteranblueshield
+      - collar-assistantmanager
+      - collar-salvagelead
+      - collar-veteransalvagelead
+      - collar-veteransalvage
+      - collar-mining
+      - collar-veteranmining
+      - collar-mailtech
+      - collar-seniormailtech
+      - collar-internservice
+      - collar-punpun
+      - collar-hydro
+      - collar-clear
+      - collar-clear
+      - collar-commander
+      - collar-blueshield
+      - collar-ntnc-cs
+      - collar-ntnc-cs
+      - collar-seniorparamedic
+      - collar-ntrep
+      - collar-solgov
+      - collar-solgov
+      - collar-solgov
+      - collar-solgov
+      - collar-solgov
+      - collar-solgov
+      - collar
+      - collar-cluwne
+      - collar-centcom
+      - collar-centcom
+      - collar-centcom
+      - collar-centcom
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+    - CorgiWearable
+
+
+# Chameleon-restricted PDAs
+- type: entity
+  id: !type:CreateVariants
+    values:
+    - VisitorClownCollarPDA
+    - VisitorChaplainCollarPDA
+    - VisitorLibrarianCollarPDA
+    - VisitorLawyerCollarPDA
+    - VisitorMedicalCollarPDA
+    - AdminCollarPDA
+    - DeathsquadCollarPDA
+    - VisitorMusicianCollarPDA
+    - VisitorCollarPDA
+    - BorgiClearCollarPDA
+    - XenoborgiClearCollarPDA
+    - NTSFCollarPDA
+    - DecimusCollarPDA
+  parent: !type:CreateVariants
+    sequences:
+    - [ VisitorClownPDA, DogCollarMixin ]
+    - [ VisitorChaplainPDA, DogCollarMixin ]
+    - [ VisitorLibrarianPDA, DogCollarMixin ]
+    - [ VisitorLawyerPDA, DogCollarMixin ]
+    - [ VisitorMedicalPDA, DogCollarMixin ]
+    - [ AdminPDA, DogCollarMixin ]
+    - [ DeathsquadPDA, DogCollarMixin ]
+    - [ VisitorMusicianPDA, DogCollarMixin ]
+    - [ VisitorPDA, DogCollarMixin ]
+    - [ BorgiClearPDA, DogCollarMixin ]
+    - [ XenoborgiClearPDA, DogCollarMixin ]
+    - [ NTSFPDA, DogCollarMixin ]
+    - [ DecimusPDA, DogCollarMixin ]
+  name: !type:CreateVariants
+    values:
+    - visitor clown collar
+    - visitor chaplain collar
+    - visitor librarian collar
+    - visitor lawyer collar
+    - visitor medical collar
+    - Admin collar
+    - deathsquad collar
+    - visitor musician collar
+    - visitor collar
+    - borgi clear collar
+    - xenoborgi clear collar
+    - NT collar
+    - jailbroken collar
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    layers:
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: pda
+      map: [ "enum.PdaVisualLayers.Base" ]
+    - map: [ "collarArt" ]
+      state: !type:CreateVariants
+        values:
+        - collar-clown
+        - collar-chaplain
+        - collar-library
+        - collar-lawyer
+        - collar-medical
+        - collar-centcom
+        - collar-centcom
+        - collar-musician
+        - collar-clear
+        - collar-clear
+        - collar-clear
+        - collar-ntsf
+        - collar-decimus
+    - sprite: Objects/Devices/pda.rsi
+      state: light_overlay
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: unshaded
+      visible: false
+    - sprite: Objects/Devices/pda.rsi
+      state: id_overlay
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    state: !type:CreateVariants
+      values:
+      - collar-clown
+      - collar-chaplain
+      - collar-library
+      - collar-lawyer
+      - collar-medical
+      - collar-centcom
+      - collar-centcom
+      - collar-musician
+      - collar-clear
+      - collar-clear
+      - collar-clear
+      - collar-ntsf
+      - collar-decimus
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - CorgiWearable
+
+# Tag lists differ from the rest, kept as their own entries.
+- type: entity
+  parent: [CluwnePDA, DogCollarMixin]
+  id: CluwneCollarPDA
+  name: cluwne collar
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    layers:
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: pda
+      map: [ "enum.PdaVisualLayers.Base" ]
+    - map: [ "collarArt" ]
+      state: collar-cluwne
+    - sprite: Objects/Devices/pda.rsi
+      state: light_overlay
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: unshaded
+      visible: false
+    - sprite: Objects/Devices/pda.rsi
+      state: id_overlay
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    state: collar-cluwne
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+    - BibleThwackRemovable
+    - CorgiWearable
+
+- type: entity
+  parent: [ChameleonPDA, DogCollarMixin]
+  id: ChameleonCollarPDA
+  name: assistant collar
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    layers:
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: pda
+      map: [ "enum.PdaVisualLayers.Base" ]
+    - map: [ "collarArt" ]
+      state: collar
+    - sprite: Objects/Devices/pda.rsi
+      state: light_overlay
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: unshaded
+      visible: false
+    - sprite: Objects/Devices/pda.rsi
+      state: id_overlay
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    state: collar
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - CorgiWearable
+
+# Own ID card each (K9IDCard/SeniorK9IDCard), so pulled out of the variant block.
+- type: entity
+  parent: [SecurityPDA, DogCollarMixin]
+  id: K9CollarPDA
+  name: K9 collar
+  components:
+  - type: Pda
+    id: K9IDCard
+  - type: Sprite
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    layers:
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: pda
+      map: [ "enum.PdaVisualLayers.Base" ]
+    - map: [ "collarArt" ]
+      state: collar-security
+    - sprite: Objects/Devices/pda.rsi
+      state: light_overlay
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: unshaded
+      visible: false
+    - sprite: Objects/Devices/pda.rsi
+      state: id_overlay
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    state: collar-security
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+    - CorgiWearable
+
+- type: entity
+  parent: [SeniorOfficerPDA, DogCollarMixin]
+  id: K9CollarSeniorPDA
+  name: senior K9 collar
+  components:
+  - type: Pda
+    id: SeniorK9IDCard
+  - type: Sprite
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    layers:
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: pda
+      map: [ "enum.PdaVisualLayers.Base" ]
+    - map: [ "collarArt" ]
+      state: collar-seniorofficer
+    - sprite: Objects/Devices/pda.rsi
+      state: light_overlay
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: unshaded
+      visible: false
+    - sprite: Objects/Devices/pda.rsi
+      state: id_overlay
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    state: collar-seniorofficer
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+    - CorgiWearable

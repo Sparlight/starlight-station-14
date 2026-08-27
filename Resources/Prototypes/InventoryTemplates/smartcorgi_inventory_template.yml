@@ -30,7 +30,7 @@
       components:
       - GasTank
   - name: id
-    slotTexture: id
+    slotTexture: collar # Starlight
     fullTextureName: template_small
     slotFlags: IDCARD
     slotGroup: SecondHotbar
@@ -38,6 +38,11 @@
     uiWindowPos: 2,1
     strippingWindowPos: 2,4
     displayName: ID
+    # Starlight Begin
+    whitelist:
+      tags:
+      - CorgiWearable
+    # Starlight End
   - name: belt
     slotTexture: belt
     fullTextureName: template_small

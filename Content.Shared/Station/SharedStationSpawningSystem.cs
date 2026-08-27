@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._Starlight.Station;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Hands.Components;
@@ -330,6 +331,8 @@ public abstract partial class SharedStationSpawningSystem : EntitySystem
                     {
                         if (slot.Name == "back" && slot.Whitelist?.Tags?.Contains("CorgiWearable") == true)
                             equipmentStr = "ClothingBagPet";
+                        else if (slot.Name == "id" && slot.Whitelist?.Tags?.Contains("CorgiWearable") == true) // Starlight
+                            equipmentStr = CorgiCollarHelper.GetCollarEquivalent(equipmentStr, PrototypeManager) ?? equipmentStr; // Starlight
                         var equipmentEntity = Spawn(equipmentStr, xform.Coordinates);
                         InventorySystem.TryEquip(entity, equipmentEntity, slot.Name, silent: true, force: true);
                     }

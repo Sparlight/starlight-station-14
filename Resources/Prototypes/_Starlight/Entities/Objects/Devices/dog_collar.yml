@@ -1,0 +1,60 @@
+- type: entity
+  parent: IDCardStandard
+  id: DogCollarIDCard
+  name: dog tag
+  description: A small tag for a beloved pet.
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+
+- type: entity
+  parent: BasePDA
+  id: DogCollarPDA
+  name: dog collar
+  description: A sturdy collar with a data-slate tag woven in.
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Devices/dog_collar.rsi
+    layers:
+    - sprite: _Starlight/Objects/Devices/dog_collar.rsi
+      state: pda
+      map: [ "enum.PdaVisualLayers.Base" ]
+    - map: [ "collarArt" ]
+      state: collar
+    - sprite: Objects/Devices/pda.rsi
+      state: light_overlay
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: unshaded
+      visible: false
+    - sprite: Objects/Devices/pda.rsi
+      state: id_overlay
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: _Starlight/Objects/Devices/dog_collar.rsi
+    state: collar
+  - type: Pda
+    id: DogCollarIDCard
+    paiSlot:
+      priority: -2
+      whitelist:
+        components:
+        - PAI
+  - type: SuitSensor
+    controlsLocked: false
+    randomMode: false
+    mode: SensorCords
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    transmitFrequencyId: SuitSensor
+    receiveFrequencyId: PDA
+    savableAddress: false
+  - type: WirelessNetworkConnection
+    range: 1200
+  - type: StationLimitedNetwork 
+  - type: SyncIdNameToWearer
+  - type: Tag
+    tags:
+    - CorgiWearable

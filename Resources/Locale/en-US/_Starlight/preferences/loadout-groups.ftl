@@ -69,6 +69,7 @@ loadout-group-k9-variant = K9 coat
 loadout-group-k9-outerclothing = K9 armor
 loadout-group-k9-eyes = K9 eyewear
 loadout-group-k9-suitstorage = K9 oxygen tank
+loadout-group-k9-collar = K9 collar
 
 loadout-group-detective-lethal = Detective lethal sidearm
 

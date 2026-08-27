@@ -19,6 +19,7 @@
     EncryptionKeySecurity: 1
     EncryptionKeyService: 3
     PrinterDocFlatpack: 2
+    DogCollarPDA: 2 # Starlight
   contrabandInventory:
     BalloonNT: 2
     LuxuryPen: 1
