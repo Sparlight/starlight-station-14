@@ -26,8 +26,6 @@ public sealed partial class StarlightInputSystem : EntitySystem
         _movementRelayTargetQuery = GetEntityQuery<MovementRelayTargetComponent>();
 
         SubscribeLocalEvent<ActiveInputMoverComponent, MapInitEvent>(OnActiveChanged);
-        SubscribeLocalEvent<ActiveInputMoverComponent, PlayerAttachedEvent>(OnActiveChanged);
-        SubscribeLocalEvent<ActiveInputMoverComponent, PlayerDetachedEvent>(OnActiveChanged);
 
         SubscribeLocalEvent<ActiveNPCComponent, MapInitEvent>(OnActiveChanged);
         SubscribeLocalEvent<ActiveNPCComponent, ComponentRemove>(OnActiveChanged);
@@ -35,10 +33,24 @@ public sealed partial class StarlightInputSystem : EntitySystem
         SubscribeLocalEvent<MovementRelayTargetComponent, ComponentRemove>(OnActiveChanged);
         SubscribeLocalEvent<MovementRelayTargetComponent, MapInitEvent>(OnActiveChanged);
 
+        // Non-humanoid mobs never get ActiveInputMoverComponent from their prototype,
+        // so the component-scoped subscriptions never reach them.
+        SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
+
         Subs.CVar(_config, StarlightCCVars.PhysicsActiveInputMoverEnabled, v => _activeInputMoverEnabled = v, true);
     }
 
     private void OnActiveChanged<TComp, TEvent>(Entity<TComp> ent, ref TEvent args) where TComp : IComponent?
+    {
+        UpdateInputMover(ent.Owner);
+    }
+
+    private void OnPlayerAttached(PlayerAttachedEvent ev) => UpdateInputMover(ev.Entity);
+
+    private void OnPlayerDetached(PlayerDetachedEvent ev) => UpdateInputMover(ev.Entity);
+
+    private void UpdateInputMover(EntityUid ent)
     {
         if (!_activeInputMoverEnabled)
             return;
