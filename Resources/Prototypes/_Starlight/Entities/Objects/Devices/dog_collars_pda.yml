@@ -10,9 +10,9 @@
     deviceNetId: Wireless
     transmitFrequencyId: SuitSensor
     savableAddress: false
-    range: 1200
   - type: StationLimitedNetwork 
   - type: WirelessNetworkConnection
+    range: 1200
   - type: SyncIdNameToWearer
 
 - type: entity
@@ -448,8 +448,8 @@
         - collar-centcom
         - collar-centcom
         - collar-centcom
-    - sprite: Objects/Devices/pda.rsi
-      state: light_overlay
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: collar-light-overlay
       map: [ "enum.PdaVisualLayers.Flashlight" ]
       shader: unshaded
       visible: false
@@ -641,11 +641,11 @@
         - collar-musician
         - collar-clear
         - collar-clear
-        - collar-clear
+        - collar-xenoborg
         - collar-ntsf
         - collar-decimus
-    - sprite: Objects/Devices/pda.rsi
-      state: light_overlay
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: collar-light-overlay
       map: [ "enum.PdaVisualLayers.Flashlight" ]
       shader: unshaded
       visible: false
@@ -668,7 +668,7 @@
       - collar-musician
       - collar-clear
       - collar-clear
-      - collar-clear
+      - collar-xenoborg
       - collar-ntsf
       - collar-decimus
   - type: Tag
@@ -690,8 +690,8 @@
       map: [ "enum.PdaVisualLayers.Base" ]
     - map: [ "collarArt" ]
       state: collar-cluwne
-    - sprite: Objects/Devices/pda.rsi
-      state: light_overlay
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: collar-light-overlay
       map: [ "enum.PdaVisualLayers.Flashlight" ]
       shader: unshaded
       visible: false
@@ -724,8 +724,8 @@
       map: [ "enum.PdaVisualLayers.Base" ]
     - map: [ "collarArt" ]
       state: collar
-    - sprite: Objects/Devices/pda.rsi
-      state: light_overlay
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: collar-light-overlay
       map: [ "enum.PdaVisualLayers.Flashlight" ]
       shader: unshaded
       visible: false
@@ -758,8 +758,8 @@
       map: [ "enum.PdaVisualLayers.Base" ]
     - map: [ "collarArt" ]
       state: collar-security
-    - sprite: Objects/Devices/pda.rsi
-      state: light_overlay
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: collar-light-overlay
       map: [ "enum.PdaVisualLayers.Flashlight" ]
       shader: unshaded
       visible: false
@@ -793,8 +793,8 @@
       map: [ "enum.PdaVisualLayers.Base" ]
     - map: [ "collarArt" ]
       state: collar-seniorofficer
-    - sprite: Objects/Devices/pda.rsi
-      state: light_overlay
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: collar-light-overlay
       map: [ "enum.PdaVisualLayers.Flashlight" ]
       shader: unshaded
       visible: false
