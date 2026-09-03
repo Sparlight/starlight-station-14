@@ -8,7 +8,7 @@
   },
   "states": [
     {
-      "name": "collar",
+      "name": "pda",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
@@ -20,10 +20,6 @@
       "name": "equipped-BELT",
       "directions": 4,
       "copyright": "Composited from Mobs/Pets/corgi.rsi (corgicollar + corgitag) by Sparlight (GitHub)."
-    },
-    {
-      "name": "pda",
-      "copyright": "Fully transparent placeholder by Sparlight (GitHub)."
     }
   ]
 }

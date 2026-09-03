@@ -17,11 +17,8 @@
   - type: Sprite
     sprite: _Starlight/Objects/Devices/dog_collar.rsi
     layers:
-    - sprite: _Starlight/Objects/Devices/dog_collar.rsi
+    - map: [ "enum.PdaVisualLayers.Base" ]
       state: pda
-      map: [ "enum.PdaVisualLayers.Base" ]
-    - map: [ "collarArt" ]
-      state: collar
     - sprite: Objects/Devices/pda.rsi
       state: light_overlay
       map: [ "enum.PdaVisualLayers.Flashlight" ]
@@ -34,7 +31,7 @@
       visible: false
   - type: Icon
     sprite: _Starlight/Objects/Devices/dog_collar.rsi
-    state: collar
+    state: pda
   - type: Pda
     id: DogCollarIDCard
     paiSlot:

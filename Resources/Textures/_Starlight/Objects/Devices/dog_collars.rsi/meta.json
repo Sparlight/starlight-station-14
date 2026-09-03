@@ -8,315 +8,315 @@
   },
   "states": [
     {
-      "name": "collar",
+      "name": "pda",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-assistantmanager",
+      "name": "pda-assistantmanager",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-atmos",
+      "name": "pda-atmos",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-bartender",
+      "name": "pda-bartender",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-blueshield",
+      "name": "pda-blueshield",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-boxer",
+      "name": "pda-boxer",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-brigmedic",
+      "name": "pda-brigmedic",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-captain",
+      "name": "pda-captain",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-cargo",
+      "name": "pda-cargo",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-ce",
+      "name": "pda-ce",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-centcom",
+      "name": "pda-centcom",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-chaplain",
+      "name": "pda-chaplain",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-chemistry",
+      "name": "pda-chemistry",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-clear",
+      "name": "pda-clear",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-clown",
+      "name": "pda-clown",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-cluwne",
+      "name": "pda-cluwne",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-cmo",
+      "name": "pda-cmo",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-commander",
+      "name": "pda-commander",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-cook",
+      "name": "pda-cook",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-corpsman",
+      "name": "pda-corpsman",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-decimus",
+      "name": "pda-decimus",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-detective",
+      "name": "pda-detective",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-dutyofficer",
+      "name": "pda-dutyofficer",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-engineer",
+      "name": "pda-engineer",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-ert",
+      "name": "pda-ert",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-hop",
+      "name": "pda-hop",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-hos",
+      "name": "pda-hos",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-hydro",
+      "name": "pda-hydro",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-interncadet",
+      "name": "pda-interncadet",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-internmed",
+      "name": "pda-internmed",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-internsci",
+      "name": "pda-internsci",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-internservice",
+      "name": "pda-internservice",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-interntech",
+      "name": "pda-interntech",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-janitor",
+      "name": "pda-janitor",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-lawyer",
+      "name": "pda-lawyer",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-library",
+      "name": "pda-library",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-magi",
+      "name": "pda-magi",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-mailtech",
+      "name": "pda-mailtech",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-medical",
+      "name": "pda-medical",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-mime",
+      "name": "pda-mime",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-miner",
+      "name": "pda-miner",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-mining",
+      "name": "pda-mining",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-musician",
+      "name": "pda-musician",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-ninja",
+      "name": "pda-ninja",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-ntnc-cs",
+      "name": "pda-ntnc-cs",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-ntrep",
+      "name": "pda-ntrep",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-ntsf",
+      "name": "pda-ntsf",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-paramedic",
+      "name": "pda-paramedic",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-pirate",
+      "name": "pda-pirate",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-punpun",
+      "name": "pda-punpun",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-qm",
+      "name": "pda-qm",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-rd",
+      "name": "pda-rd",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-reporter",
+      "name": "pda-reporter",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-salvagelead",
+      "name": "pda-salvagelead",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-science",
+      "name": "pda-science",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-security",
+      "name": "pda-security",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-seniorchemist",
+      "name": "pda-seniorchemist",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-seniorcourier",
+      "name": "pda-seniorcourier",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-seniorengineer",
+      "name": "pda-seniorengineer",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-seniormailtech",
+      "name": "pda-seniormailtech",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-seniorofficer",
+      "name": "pda-seniorofficer",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-seniorparamedic",
+      "name": "pda-seniorparamedic",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-seniorphysician",
+      "name": "pda-seniorphysician",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-seniorresearcher",
+      "name": "pda-seniorresearcher",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-solgov",
+      "name": "pda-solgov",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-syndi",
+      "name": "pda-syndi",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-syndi-commander",
+      "name": "pda-syndi-commander",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-syndi-corpsman",
+      "name": "pda-syndi-corpsman",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-syndi-operative",
+      "name": "pda-syndi-operative",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-veteranblueshield",
+      "name": "pda-veteranblueshield",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-veteranbrigmedic",
+      "name": "pda-veteranbrigmedic",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-veterancorpsman",
+      "name": "pda-veterancorpsman",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-veteranmining",
+      "name": "pda-veteranmining",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-veteransalvage",
+      "name": "pda-veteransalvage",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-veteransalvagelead",
+      "name": "pda-veteransalvagelead",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-warden",
+      "name": "pda-warden",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-wizard",
+      "name": "pda-wizard",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
-      "name": "collar-zookeeper",
+      "name": "pda-zookeeper",
       "copyright": "PLACEHOLDER - temporary duplicate of dog_collar.rsi's own composite (itself from Mobs/Pets/corgi.rsi, tgstation commit 53d1f1477d22a11a99c6c6924977cd431075761b) pending dedicated art for this state."
     },
     {
@@ -330,15 +330,11 @@
       "copyright": "Composited (all 4 frames of corgicollar + corgitag) from Mobs/Pets/corgi.rsi: https://github.com/tgstation/tgstation/commit/53d1f1477d22a11a99c6c6924977cd431075761b"
     },
     {
-      "name": "pda",
-      "copyright": "Fully transparent placeholder by Sparlight (GitHub)."
-    },
-    {
       "name": "collar-light-overlay",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     },
     {
-      "name": "collar-xenoborg",
+      "name": "pda-clear-xeno",
       "copyright": "Made by xxhotgirl69 (GitHub)."
     }
   ]
