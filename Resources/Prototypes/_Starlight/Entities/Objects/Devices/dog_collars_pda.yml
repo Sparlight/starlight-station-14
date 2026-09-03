@@ -340,7 +340,7 @@
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: !type:CreateVariants
-        values:
+        values: &pda_states_main
         - pda
         - pda-interntech
         - pda-internmed
@@ -458,111 +458,7 @@
   - type: Icon
     sprite: _Starlight/Objects/Devices/dog_collars.rsi
     state: !type:CreateVariants
-      values:
-      - pda
-      - pda-interntech
-      - pda-internmed
-      - pda-interncadet
-      - pda-internsci
-      - pda-internservice
-      - pda-cook
-      - pda-hydro
-      - pda-clown
-      - pda-mime
-      - pda-chaplain
-      - pda-qm
-      - pda-cargo
-      - pda-miner
-      - pda-bartender
-      - pda-library
-      - pda-lawyer
-      - pda-janitor
-      - pda-captain
-      - pda-hop
-      - pda-ce
-      - pda-engineer
-      - pda-cmo
-      - pda-medical
-      - pda-paramedic
-      - pda-chemistry
-      - pda-rd
-      - pda-science
-      - pda-hos
-      - pda-warden
-      - pda-security
-      - pda-centcom
-      - pda-musician
-      - pda-atmos
-      - pda-clear
-      - pda-syndi
-      - pda-syndi-operative
-      - pda-syndi-corpsman
-      - pda-syndi-commander
-      - pda-ert
-      - pda-ert
-      - pda-ert
-      - pda-ert
-      - pda-ert
-      - pda-ert
-      - pda-ert
-      - pda-medical
-      - pda-reporter
-      - pda-zookeeper
-      - pda-boxer
-      - pda-detective
-      - pda-brigmedic
-      - pda-seniorengineer
-      - pda-seniorresearcher
-      - pda-seniorphysician
-      - pda-seniorofficer
-      - pda-seniorcourier
-      - pda-ninja
-      - pda-pirate
-      - pda
-      - pda-wizard
-      - pda-clear
-      - pda-seniorchemist
-      - pda-veteranbrigmedic
-      - pda-corpsman
-      - pda-veterancorpsman
-      - pda-dutyofficer
-      - pda-magi
-      - pda-ntrep
-      - pda-centcom
-      - pda-lawyer
-      - pda-blueshield
-      - pda-veteranblueshield
-      - pda-assistantmanager
-      - pda-salvagelead
-      - pda-veteransalvagelead
-      - pda-veteransalvage
-      - pda-mining
-      - pda-veteranmining
-      - pda-mailtech
-      - pda-seniormailtech
-      - pda-internservice
-      - pda-punpun
-      - pda-hydro
-      - pda-clear
-      - pda-clear
-      - pda-commander
-      - pda-blueshield
-      - pda-ntnc-cs
-      - pda-ntnc-cs
-      - pda-seniorparamedic
-      - pda-ntrep
-      - pda-solgov
-      - pda-solgov
-      - pda-solgov
-      - pda-solgov
-      - pda-solgov
-      - pda-solgov
-      - pda
-      - pda-cluwne
-      - pda-centcom
-      - pda-centcom
-      - pda-centcom
-      - pda-centcom
+      values: *pda_states_main
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -621,7 +517,7 @@
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: !type:CreateVariants
-        values:
+        values: &pda_states_nonchameleon
         - pda-clown
         - pda-chaplain
         - pda-library
@@ -647,19 +543,7 @@
   - type: Icon
     sprite: _Starlight/Objects/Devices/dog_collars.rsi
     state: !type:CreateVariants
-      values:
-      - pda-clown
-      - pda-chaplain
-      - pda-library
-      - pda-lawyer
-      - pda-medical
-      - pda-centcom
-      - pda-centcom
-      - pda-musician
-      - pda-clear
-      - pda-clear
-      - pda-ntsf
-      - pda-decimus
+      values: *pda_states_nonchameleon
   - type: Tag
     tags:
     - DoorBumpOpener
