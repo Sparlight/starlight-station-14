@@ -37,6 +37,9 @@
     strippingWindowPos: 2,4
     dependsOn: jumpsuit
     displayName: ID
+    blacklist:
+      tags:
+      - AnimalCollar
   - name: suitstorage
     slotTexture: suit_storage
     slotFlags:   SUITSTORAGE

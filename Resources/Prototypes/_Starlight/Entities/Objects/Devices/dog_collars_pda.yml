@@ -465,6 +465,7 @@
     - WhitelistChameleon
     - WhitelistChameleonPDA
     - CorgiWearable
+    - AnimalCollar
 
 
 # Chameleon-restricted PDAs
@@ -548,6 +549,7 @@
     tags:
     - DoorBumpOpener
     - CorgiWearable
+    - AnimalCollar
 
 - type: entity
   parent: [ XenoborgiClearPDA, DogCollarMixin ]
@@ -581,6 +583,7 @@
     tags:
     - DoorBumpOpener
     - CorgiWearable
+    - AnimalCollar
 
 # Tag lists differ from the rest, kept as their own entries.
 - type: entity
@@ -613,6 +616,7 @@
     - WhitelistChameleonPDA
     - BibleThwackRemovable
     - CorgiWearable
+    - AnimalCollar
 
 - type: entity
   parent: [ChameleonPDA, DogCollarMixin]
@@ -641,6 +645,7 @@
     tags:
     - DoorBumpOpener
     - CorgiWearable
+    - AnimalCollar
 
 - type: entity
   parent: [SecurityPDA, DogCollarMixin]
@@ -673,6 +678,7 @@
     - WhitelistChameleon
     - WhitelistChameleonPDA
     - CorgiWearable
+    - AnimalCollar
 
 - type: entity
   parent: [SeniorOfficerPDA, DogCollarMixin]
@@ -705,3 +711,4 @@
     - WhitelistChameleon
     - WhitelistChameleonPDA
     - CorgiWearable
+    - AnimalCollar

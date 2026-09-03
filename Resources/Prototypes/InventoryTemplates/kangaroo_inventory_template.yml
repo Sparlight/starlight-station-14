@@ -45,6 +45,9 @@
     whitelist:
       tags:
         - Kangaroo
+    blacklist:
+      tags:
+      - AnimalCollar
 
   - name: pocket1
     slotTexture: pocket
