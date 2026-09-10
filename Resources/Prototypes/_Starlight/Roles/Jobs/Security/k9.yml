@@ -19,7 +19,7 @@
     components:
     - type: SkipLoadingCharacterRecords
   - !type:AddImplantSpecial
-    implants: [ TrackingImplant, MindShieldImplant ]
+    implants: [ MindShieldImplant ]
   - !type:EquipStartingGearSpecial
     gear: K9Gear
   applyTraits: false

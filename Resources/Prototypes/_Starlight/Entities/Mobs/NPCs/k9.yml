@@ -70,8 +70,6 @@
     - External
     - Cryogenics
   - type: StatusIcon
-  - type: FixedJobIcon
-    job: K9
   - type: SpriteVariant
     availableVariants:
     - k9-brown
