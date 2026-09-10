@@ -62,13 +62,6 @@
       proper: true
   - type: Vocal
     screamAction: null
-  - type: Access
-    tags:
-    - Security
-    - Brig
-    - Maintenance
-    - External
-    - Cryogenics
   - type: StatusIcon
   - type: SpriteVariant
     availableVariants:
