@@ -3373,6 +3373,7 @@
     normalBodyTemperature: 311.45 # Slightly higher than human
     thermalRegulationTemperatureThreshold: 2 # Same as human
   - type: FootprintOwner
+  - type: PawPrints
   # Starlight End
 
 - type: entity

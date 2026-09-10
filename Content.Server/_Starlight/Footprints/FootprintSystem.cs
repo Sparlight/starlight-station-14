@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._Funkystation.Footprints;
+using Content.Shared._Starlight.Footprints;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -31,12 +32,14 @@ public sealed partial class FootprintSystem : EntitySystem
     [Dependency] private EntityQuery<PuddleComponent> _puddleQuery = default!;
     [Dependency] private EntityQuery<FootprintComponent> _footprintQuery = default!;
     [Dependency] private EntityQuery<NoFootprintsComponent> _noFootprintsQuery = default!;
+    [Dependency] private EntityQuery<PawPrintsComponent> _pawPrintsQuery = default!;
 
     // A footprint sprite layer is relatively expensive. Chemical volume may continue accumulating after this cap,
     // but no more visual/network state is added until the footprint reaches capacity and becomes a puddle.
     private const int MaxPrintsPerTile = 64;
 
     private static readonly EntProtoId FootprintEntityId = "Footprint";
+    private static readonly EntProtoId PawFootprintEntityId = "PawFootprint";
     private static readonly EntProtoId PrintSolutionEntityId = "SolutionPrint";
     private const string PrintSolutionName = "print";
     private const string PuddleTargetSolution = "puddle";
@@ -243,10 +246,13 @@ public sealed partial class FootprintSystem : EntitySystem
         if (transferAmount < minimumVolume)
             return;
 
+        var isPawPrint = isStanding && _pawPrintsQuery.HasComponent(entity.Owner);
+        var footprintEntityId = isPawPrint ? PawFootprintEntityId : FootprintEntityId;
+
         var spawned = false;
-        if (!TryGetAnchoredFootprint(gridUid, grid, tile, out var printUid, out var printComp))
+        if (!TryGetAnchoredFootprint(gridUid, grid, tile, footprintEntityId, out var printUid, out var printComp))
         {
-            printUid = Spawn(FootprintEntityId, coords);
+            printUid = Spawn(footprintEntityId, coords);
             printComp = Comp<FootprintComponent>(printUid);
             spawned = true;
         }
@@ -302,7 +308,7 @@ public sealed partial class FootprintSystem : EntitySystem
                     MathF.Floor(localPosition.Y / grid.TileSize) -
                     grid.TileSize / 2f;
 
-        var state = isStanding ? "foot" : _random.Pick(DragStates);
+        var state = !isStanding ? _random.Pick(DragStates) : isPawPrint ? "paw" : "foot";
 
         printComp.Prints.Add(new FootprintData(new Vector2(normX, normY), rotation, color, state));
         Dirty(printUid, printComp);
@@ -318,8 +324,26 @@ public sealed partial class FootprintSystem : EntitySystem
             return;
 
         var tile = _map.CoordinatesToTile(gridUid, grid, xform.Coordinates);
-        if (TryGetAnchoredFootprint(gridUid, grid, tile, out var printUid, out _))
+
+        // A tile can hold more than one footprint entity now (human + paw), so convert all of them.
+        var anchored = _map.GetAnchoredEntities(gridUid, grid, tile);
+        List<EntityUid>? found = null;
+        while (anchored.MoveNext(out var uid))
+        {
+            if (!_footprintQuery.HasComponent(uid.Value))
+                continue;
+
+            found ??= new List<EntityUid>();
+            found.Add(uid.Value);
+        }
+
+        if (found is null)
+            return;
+
+        foreach (var printUid in found)
+        {
             TurnIntoPuddle(printUid, xform.Coordinates);
+        }
     }
 
     private void TurnIntoPuddle(EntityUid printUid, EntityCoordinates? coords = null)
@@ -387,6 +411,7 @@ public sealed partial class FootprintSystem : EntitySystem
         EntityUid gridUid,
         MapGridComponent grid,
         Vector2i tile,
+        EntProtoId desiredPrototype,
         out EntityUid entityUid,
         [NotNullWhen(true)] out FootprintComponent? component)
     {
@@ -394,6 +419,11 @@ public sealed partial class FootprintSystem : EntitySystem
         while (anchored.MoveNext(out var uid))
         {
             if (!_footprintQuery.TryGetComponent(uid.Value, out component))
+                continue;
+
+            // Different kinds use different sprite sheets, so match by prototype instead
+            // of just any FootprintComponent on the tile.
+            if (MetaData(uid.Value).EntityPrototype?.ID != desiredPrototype)
                 continue;
 
             entityUid = uid.Value;

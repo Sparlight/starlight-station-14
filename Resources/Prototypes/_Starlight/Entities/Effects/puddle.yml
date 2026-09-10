@@ -46,3 +46,15 @@
     tags:
     - DNASolutionScannable
     - HideContextMenu
+
+# For entities with PawPrintsComponent - same as Footprint but uses the paw sprite for
+# the standing state. Dragging still uses the default Footprint entity above.
+- type: entity
+  parent: Footprint
+  name: paw prints
+  id: PawFootprint
+  save: false
+  description: Huh? Whose paw prints are these?
+  components:
+  - type: Footprint
+    sprites: /Textures/_Starlight/Effects/pawprints.rsi
