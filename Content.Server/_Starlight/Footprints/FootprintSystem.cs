@@ -33,18 +33,20 @@ public sealed partial class FootprintSystem : EntitySystem
     [Dependency] private EntityQuery<FootprintComponent> _footprintQuery = default!;
     [Dependency] private EntityQuery<NoFootprintsComponent> _noFootprintsQuery = default!;
     [Dependency] private EntityQuery<PawPrintsComponent> _pawPrintsQuery = default!;
+    [Dependency] private EntityQuery<StandingStateComponent> _standingQuery = default!;
+    [Dependency] private EntityQuery<MetaDataComponent> _metaQuery = default!;
 
     // A footprint sprite layer is relatively expensive. Chemical volume may continue accumulating after this cap,
     // but no more visual/network state is added until the footprint reaches capacity and becomes a puddle.
     private const int MaxPrintsPerTile = 64;
 
-    private static readonly EntProtoId FootprintEntityId = "Footprint";
-    private static readonly EntProtoId PawFootprintEntityId = "PawFootprint";
-    private static readonly EntProtoId PrintSolutionEntityId = "SolutionPrint";
+    private static readonly EntProtoId _footprintEntityId = "Footprint";
+    private static readonly EntProtoId _pawFootprintEntityId = "PawFootprint";
+    private static readonly EntProtoId _printSolutionEntityId = "SolutionPrint";
     private const string PrintSolutionName = "print";
     private const string PuddleTargetSolution = "puddle";
 
-    private static readonly string[] DragStates =
+    private static readonly string[] _dragStates =
     [
         "dragging-1",
         "dragging-2",
@@ -66,10 +68,7 @@ public sealed partial class FootprintSystem : EntitySystem
             after: [typeof(SharedPuddleSystem)]);
     }
 
-    private void OnSolutionChanged(Entity<FootprintComponent> entity, ref SolutionChangedEvent args)
-    {
-        UpdatePrintColors(entity);
-    }
+    private void OnSolutionChanged(Entity<FootprintComponent> entity, ref SolutionChangedEvent args) => UpdatePrintColors(entity);
 
     private void UpdatePrintColors(Entity<FootprintComponent> entity)
     {
@@ -94,13 +93,35 @@ public sealed partial class FootprintSystem : EntitySystem
             Dirty(entity);
     }
 
-    private void OnFootprintCleaned(Entity<FootprintComponent> entity, ref FootprintCleanEvent args)
-    {
-        TurnIntoPuddle(entity.Owner);
-    }
+    private void OnFootprintCleaned(Entity<FootprintComponent> entity, ref FootprintCleanEvent args) => TurnIntoPuddle(entity.Owner);
 
     private void OnEntityMoved(Entity<FootprintOwnerComponent> entity, ref MoveEvent args)
     {
+        // MoveEvent fires on rotation too, which can't advance a step.
+        if (args.OnlyRotation)
+            return;
+
+        if (!args.OldPosition.IsValid(EntityManager) || !args.NewPosition.IsValid(EntityManager))
+            return;
+
+        // Same parent means one rigid frame, so local distance equals map distance.
+        var moved = args.ParentChanged
+            ? Vector2.Distance(
+                _transform.ToMapCoordinates(args.NewPosition).Position,
+                _transform.ToMapCoordinates(args.OldPosition).Position)
+            : Vector2.Distance(args.NewPosition.Position, args.OldPosition.Position);
+
+        entity.Comp.DistanceWalked += moved;
+
+        var isStanding = !_standingQuery.TryGetComponent(entity.Owner, out var standing) || standing.Standing;
+        var requiredDistance = isStanding ? entity.Comp.FootstepDistance : entity.Comp.DragDistance;
+
+        if (entity.Comp.DistanceWalked < requiredDistance)
+            return;
+
+        entity.Comp.DistanceWalked -= requiredDistance;
+
+        // Below here runs once per step, not once per move event.
         if (_noFootprintsQuery.HasComponent(entity.Owner))
             return;
 
@@ -110,25 +131,12 @@ public sealed partial class FootprintSystem : EntitySystem
             return;
         }
 
-        if (!args.OldPosition.IsValid(EntityManager) || !args.NewPosition.IsValid(EntityManager))
+        var xform = Transform(entity.Owner);
+        if (xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
             return;
 
         var prevPos = _transform.ToMapCoordinates(args.OldPosition).Position;
         var currentPos = _transform.ToMapCoordinates(args.NewPosition).Position;
-
-        entity.Comp.DistanceWalked += Vector2.Distance(currentPos, prevPos);
-
-        var isStanding = !TryComp<StandingStateComponent>(entity.Owner, out var standing) || standing.Standing;
-        var requiredDistance = isStanding ? entity.Comp.FootstepDistance : entity.Comp.DragDistance;
-
-        if (entity.Comp.DistanceWalked < requiredDistance)
-            return;
-
-        entity.Comp.DistanceWalked -= requiredDistance;
-
-        var xform = Transform(entity.Owner);
-        if (xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
-            return;
 
         var oldLocal = _map.WorldToLocal(gridUid, grid, prevPos);
         var newLocal = _map.WorldToLocal(gridUid, grid, currentPos);
@@ -143,8 +151,8 @@ public sealed partial class FootprintSystem : EntitySystem
         var stepOffset = isStanding ? entity.Comp.AlternateStepOffset : 0f;
         entity.Comp.AlternateStepOffset = -entity.Comp.AlternateStepOffset;
 
-        var rightVector = new Angle(walkAngle.Theta - Math.PI / 2).ToVec();
-        var offsetPos = newLocal + rightVector * stepOffset;
+        var rightVector = new Angle(walkAngle.Theta - (Math.PI / 2)).ToVec();
+        var offsetPos = newLocal + (rightVector * stepOffset);
 
         var coords = new EntityCoordinates(gridUid, offsetPos);
         var tileIndices = _map.CoordinatesToTile(gridUid, grid, coords);
@@ -219,7 +227,7 @@ public sealed partial class FootprintSystem : EntitySystem
 
         var manager = EnsureComp<SolutionManagerComponent>(entity.Owner);
         var solutionContainer = _container.EnsureContainer<Container>(entity.Owner, manager.Container);
-        ownerSolution = _solutionContainer.CreateSolution(PrintSolutionEntityId, solutionContainer);
+        ownerSolution = _solutionContainer.CreateSolution(_printSolutionEntityId, solutionContainer);
 
         // SolutionPrint is 50u for tiles. Carried residue only needs the owner's configured body/foot capacity.
         ownerSolution.Comp.Solution.MaxVolume = FixedPoint2.Max(
@@ -247,7 +255,7 @@ public sealed partial class FootprintSystem : EntitySystem
             return;
 
         var isPawPrint = isStanding && _pawPrintsQuery.HasComponent(entity.Owner);
-        var footprintEntityId = isPawPrint ? PawFootprintEntityId : FootprintEntityId;
+        var footprintEntityId = isPawPrint ? _pawFootprintEntityId : _footprintEntityId;
 
         var spawned = false;
         if (!TryGetAnchoredFootprint(gridUid, grid, tile, footprintEntityId, out var printUid, out var printComp))
@@ -301,14 +309,14 @@ public sealed partial class FootprintSystem : EntitySystem
         var color = baseColor.WithAlpha(alpha);
 
         var localPosition = coords.Position;
-        var normX = localPosition.X / grid.TileSize -
+        var normX = (localPosition.X / grid.TileSize) -
                     MathF.Floor(localPosition.X / grid.TileSize) -
-                    grid.TileSize / 2f;
-        var normY = localPosition.Y / grid.TileSize -
+                    (grid.TileSize / 2f);
+        var normY = (localPosition.Y / grid.TileSize) -
                     MathF.Floor(localPosition.Y / grid.TileSize) -
-                    grid.TileSize / 2f;
+                    (grid.TileSize / 2f);
 
-        var state = !isStanding ? _random.Pick(DragStates) : isPawPrint ? "paw" : "foot";
+        var state = !isStanding ? _random.Pick(_dragStates) : isPawPrint ? "paw" : "foot";
 
         printComp.Prints.Add(new FootprintData(new Vector2(normX, normY), rotation, color, state));
         Dirty(printUid, printComp);
@@ -325,22 +333,33 @@ public sealed partial class FootprintSystem : EntitySystem
 
         var tile = _map.CoordinatesToTile(gridUid, grid, xform.Coordinates);
 
-        // A tile can hold more than one footprint entity now (human + paw), so convert all of them.
+        // A tile can hold both a human and a paw print, so convert every one. Collected
+        // first because spilling anchors new entities. Usually 0 or 1, so only allocate
+        // if a second turns up.
         var anchored = _map.GetAnchoredEntities(gridUid, grid, tile);
-        List<EntityUid>? found = null;
+        var first = EntityUid.Invalid;
+        List<EntityUid>? extra = null;
+
         while (anchored.MoveNext(out var uid))
         {
             if (!_footprintQuery.HasComponent(uid.Value))
                 continue;
 
-            found ??= new List<EntityUid>();
-            found.Add(uid.Value);
+            if (first == EntityUid.Invalid)
+                first = uid.Value;
+            else
+                (extra ??= new List<EntityUid>()).Add(uid.Value);
         }
 
-        if (found is null)
+        if (first == EntityUid.Invalid)
             return;
 
-        foreach (var printUid in found)
+        TurnIntoPuddle(first, xform.Coordinates);
+
+        if (extra is null)
+            return;
+
+        foreach (var printUid in extra)
         {
             TurnIntoPuddle(printUid, xform.Coordinates);
         }
@@ -378,7 +397,7 @@ public sealed partial class FootprintSystem : EntitySystem
 
         return FixedPoint2.Max(
             FixedPoint2.Zero,
-            FixedPoint2.Min(volume, spread * fraction + minPrintVolume));
+            FixedPoint2.Min(volume, (spread * fraction) + minPrintVolume));
     }
 
     private bool TryGetAnchoredPuddle(
@@ -421,10 +440,13 @@ public sealed partial class FootprintSystem : EntitySystem
             if (!_footprintQuery.TryGetComponent(uid.Value, out component))
                 continue;
 
-            // Different kinds use different sprite sheets, so match by prototype instead
-            // of just any FootprintComponent on the tile.
-            if (MetaData(uid.Value).EntityPrototype?.ID != desiredPrototype)
+            // Different kinds use different sprite sheets, so match by prototype, not just any
+            // FootprintComponent on the tile.
+            if (!_metaQuery.TryGetComponent(uid.Value, out var meta) ||
+                (meta.EntityPrototype is { } entProto && entProto.ID != desiredPrototype))
+            {
                 continue;
+            }
 
             entityUid = uid.Value;
             return true;

@@ -16,15 +16,9 @@ public sealed partial class FootprintSystem : EntitySystem
         SubscribeLocalEvent<FootprintComponent, AfterAutoHandleStateEvent>(OnStateUpdated);
     }
 
-    private void OnStartup(Entity<FootprintComponent> entity, ref ComponentStartup args)
-    {
-        UpdateVisuals(entity);
-    }
+    private void OnStartup(Entity<FootprintComponent> entity, ref ComponentStartup args) => UpdateVisuals(entity);
 
-    private void OnStateUpdated(Entity<FootprintComponent> entity, ref AfterAutoHandleStateEvent args)
-    {
-        UpdateVisuals(entity);
-    }
+    private void OnStateUpdated(Entity<FootprintComponent> entity, ref AfterAutoHandleStateEvent args) => UpdateVisuals(entity);
 
     private void UpdateVisuals(Entity<FootprintComponent> entity)
     {
@@ -37,10 +31,16 @@ public sealed partial class FootprintSystem : EntitySystem
         for (var i = 0; i < entity.Comp.Prints.Count; i++)
         {
             var print = entity.Comp.Prints[i];
-            var layer = _sprite.TryGetLayer(nullableSprite, i, out var existing, logMissing: false)
-                ? existing
-                : _sprite.AddBlankLayer(spriteEntity, i);
 
+            // Only Color changes after a print is added, so an existing layer doesn't need
+            // its offset/rotation/sprite set again. Saves a SpriteSpecifier alloc per print.
+            if (_sprite.TryGetLayer(nullableSprite, i, out var existing, logMissing: false))
+            {
+                _sprite.LayerSetColor(existing, print.Color);
+                continue;
+            }
+
+            var layer = _sprite.AddBlankLayer(spriteEntity, i);
             _sprite.LayerSetOffset(layer, print.Offset);
             _sprite.LayerSetRotation(layer, print.Rotation);
             _sprite.LayerSetColor(layer, print.Color);
