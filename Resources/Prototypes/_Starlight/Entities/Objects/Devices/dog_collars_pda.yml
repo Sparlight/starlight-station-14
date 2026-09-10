@@ -712,3 +712,36 @@
     - WhitelistChameleonPDA
     - CorgiWearable
     - AnimalCollar
+
+# MedTakPDA's own tag list excludes WhitelistChameleon/WhitelistChameleonPDA ("Ignore Chameleon
+# tags" pattern, same as the admin/deathsquad/visitor collars above) - kept consistent with that.
+- type: entity
+  parent: [MedTakPDASecurity, DogCollarMixin]
+  id: MedTakCollarPDASecurity
+  name: MedTak security collar
+  components:
+  - type: Pda
+    id: MedTakIDCardSecurity
+  - type: Sprite
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: pda-medtak
+    - sprite: _Starlight/Objects/Devices/dog_collars.rsi
+      state: collar-light-overlay
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: unshaded
+      visible: false
+    - sprite: Objects/Devices/pda.rsi
+      state: id_overlay
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: _Starlight/Objects/Devices/dog_collars.rsi
+    state: pda-medtak
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - CorgiWearable
+    - AnimalCollar
