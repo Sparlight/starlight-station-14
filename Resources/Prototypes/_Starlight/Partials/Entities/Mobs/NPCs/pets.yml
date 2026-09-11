@@ -1,0 +1,17 @@
+- type: !PartialOnly entity
+  id: MobBingus
+  components:
+  - type: FootprintOwner
+  - type: PawPrints
+
+- type: !PartialOnly entity
+  id: MobMcGriff
+  components:
+  - type: FootprintOwner
+  - type: PawPrints
+
+- type: !PartialOnly entity
+  id: MobWalter
+  components:
+  - type: FootprintOwner
+  - type: PawPrints
