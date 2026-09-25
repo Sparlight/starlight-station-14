@@ -10,6 +10,7 @@ using Content.Shared.Camera;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory.VirtualItem;
@@ -69,6 +70,8 @@ public sealed partial class LatchSystem : SharedLatchSystem
 
         SubscribeLocalEvent<LatchBiteHarderActionEvent>(OnBiteHarderAction);
         SubscribeLocalEvent<LatchReleaseActionEvent>(OnReleaseAction);
+
+        SubscribeNetworkEvent<LatchStruggleRequestEvent>(OnStruggleRequest);
     }
 
     /// <summary>
@@ -145,6 +148,18 @@ public sealed partial class LatchSystem : SharedLatchSystem
         comp.EndTime = extended > comp.MaxEndTime ? comp.MaxEndTime : extended;
         Dirty(uid, comp);
 
+        if (TryComp<LatchStruggleComponent>(target, out var struggle))
+        {
+            var now = Timing.CurTime;
+            struggle.FrenzyEndTime = now + comp.StruggleFrenzyDuration;
+
+            // While paused, the next attempt picks the speed up when it starts.
+            if (struggle.Block == LatchStruggleBlock.None)
+                RebaseStruggle(struggle, now, GetStruggleSpeed(comp, struggle, now));
+
+            Dirty(target, struggle);
+        }
+
         _audio.PlayPvs(comp.BiteHarderSound, uid);
         RaiseNetworkEvent(new LatchBiteShakeEvent(GetNetEntity(uid)), Filter.Pvs(uid, entityManager: EntityManager));
 
@@ -190,6 +205,13 @@ public sealed partial class LatchSystem : SharedLatchSystem
         var latched = EnsureComp<LatchedComponent>(target);
         latched.Latcher = uid;
         Dirty(target, latched);
+
+        var struggle = EnsureComp<LatchStruggleComponent>(target);
+        struggle.Block = LatchStruggleBlock.None;
+        struggle.LastResult = LatchStruggleResult.None;
+        struggle.FrenzyEndTime = TimeSpan.Zero;
+        StartStruggleAttempt(comp, struggle, Timing.CurTime + comp.StruggleCooldown, Timing.CurTime);
+        Dirty(target, struggle);
 
         var toLatcher = _transform.GetWorldPosition(uid) - _transform.GetWorldPosition(target);
         var withinObscureRange = MathF.Abs(toLatcher.Y) <= comp.UiObscureNorthRange
@@ -270,6 +292,7 @@ public sealed partial class LatchSystem : SharedLatchSystem
 
         if (target is { } targetUid && Exists(targetUid))
         {
+            RemComp<LatchStruggleComponent>(targetUid);
             RemComp<LatchedComponent>(targetUid);
             _alert.ClearAlert(targetUid, comp.LatchAlert);
             _speed.RefreshMovementSpeedModifiers(targetUid);
@@ -347,6 +370,142 @@ public sealed partial class LatchSystem : SharedLatchSystem
     }
 
     /// <summary>
+    /// A latch target pressed Struggle: grade it, shorten the latch, and queue the next attempt.
+    /// </summary>
+    private void OnStruggleRequest(LatchStruggleRequestEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not { } target ||
+            !TryComp<LatchedComponent>(target, out var latched) ||
+            !TryComp<LatchStruggleComponent>(target, out var struggle) ||
+            !TryComp<LatchComponent>(latched.Latcher, out var latch) ||
+            !latch.Active ||
+            latch.Target != target)
+        {
+            return;
+        }
+
+        var now = Timing.CurTime;
+
+        // Paused, or still in the gap after the last press: one press per attempt.
+        if (struggle.Block != LatchStruggleBlock.None || now < struggle.SegmentStart)
+            return;
+
+        // The client's frame sits up to one tick past its stamped tick; honour that, no further.
+        var maxOffset = (float) Timing.TickPeriod.TotalSeconds;
+        var offset = TimeSpan.FromSeconds(Math.Clamp(msg.TickOffset, 0f, maxOffset));
+        var cursor = GetStruggleCursor(struggle, now + offset);
+        var result = GradeStruggle(cursor, struggle.ZoneCenter, latch.StrugglePerfectWidth, latch.StruggleGoodWidth);
+
+        struggle.LastResult = result;
+        struggle.LastPressPosition = cursor;
+        struggle.LastZoneCenter = struggle.ZoneCenter;
+        struggle.LastPressTime = now;
+        StartStruggleAttempt(latch, struggle, now + latch.StruggleCooldown, now);
+        Dirty(target, struggle);
+
+        var reduction = result switch
+        {
+            LatchStruggleResult.Perfect => latch.StrugglePerfectReduction,
+            LatchStruggleResult.Good => latch.StruggleGoodReduction,
+            _ => TimeSpan.Zero,
+        };
+
+        if (reduction <= TimeSpan.Zero)
+            return;
+
+        latch.EndTime -= reduction;
+        latch.MaxEndTime -= reduction;
+        Dirty(latched.Latcher, latch);
+
+        if (latch.EndTime <= now)
+            EndLatch(latched.Latcher, latch);
+    }
+
+    /// <summary>
+    /// Pauses struggling while the target can't act, resumes with a fresh
+    /// attempt afterwards, and drops the Bite Harder speed-up once it expires.
+    /// </summary>
+    private void UpdateStruggle(EntityUid target, LatchStruggleComponent struggle, LatchComponent latch, TimeSpan now)
+    {
+        var block = GetStruggleBlock(target);
+        if (block != struggle.Block)
+        {
+            if (block == LatchStruggleBlock.None)
+            {
+                StartStruggleAttempt(latch, struggle, now + latch.StruggleCooldown, now);
+            }
+            else if (struggle.Block == LatchStruggleBlock.None)
+            {
+                // Freeze the cursor where it is.
+                RebaseStruggle(struggle, now, struggle.Speed);
+                struggle.SegmentStart = TimeSpan.MaxValue;
+            }
+
+            struggle.Block = block;
+            Dirty(target, struggle);
+            return;
+        }
+
+        if (block != LatchStruggleBlock.None)
+            return;
+
+        var speed = GetStruggleSpeed(latch, struggle, now);
+        if (MathF.Abs(struggle.Speed - speed) > 0.0001f)
+        {
+            RebaseStruggle(struggle, now, speed);
+            Dirty(target, struggle);
+        }
+    }
+
+    private LatchStruggleBlock GetStruggleBlock(EntityUid target)
+    {
+        if (_mobState.IsIncapacitated(target) || HasComp<SleepingComponent>(target))
+            return LatchStruggleBlock.Incapacitated;
+
+        if (TryComp<StaminaComponent>(target, out var stamina) && stamina.Critical)
+            return LatchStruggleBlock.Exhausted;
+
+        return HasComp<StunnedComponent>(target)
+            ? LatchStruggleBlock.Stunned
+            : LatchStruggleBlock.None;
+    }
+
+    /// <summary>
+    /// Picks a new random zone and parks the cursor at the left edge until <paramref name="start"/>.
+    /// </summary>
+    private void StartStruggleAttempt(LatchComponent latch, LatchStruggleComponent struggle, TimeSpan start, TimeSpan now)
+    {
+        var edge = (latch.StrugglePerfectWidth / 2f) + latch.StruggleGoodWidth;
+        var min = MathF.Max(latch.StruggleMinZoneCenter, edge);
+        var max = 1f - edge;
+
+        struggle.ZoneCenter = max > min ? _random.NextFloat(min, max) : 0.5f;
+        struggle.SegmentPosition = 0f;
+        struggle.SegmentStart = start;
+        struggle.Speed = GetStruggleSpeed(latch, struggle, now);
+    }
+
+    private static float GetStruggleSpeed(LatchComponent latch, LatchStruggleComponent struggle, TimeSpan now)
+    {
+        var speed = latch.StruggleCrossingTime > 0f ? 1f / latch.StruggleCrossingTime : 1f;
+        return now < struggle.FrenzyEndTime ? speed * latch.StruggleFrenzySpeedMultiplier : speed;
+    }
+
+    /// <summary>
+    /// Changes cursor speed mid-sweep without the cursor jumping.
+    /// </summary>
+    private static void RebaseStruggle(LatchStruggleComponent struggle, TimeSpan now, float speed)
+    {
+        if (now > struggle.SegmentStart)
+        {
+            struggle.SegmentPosition = GetStruggleUnfolded(struggle, now);
+            struggle.SegmentStart = now;
+        }
+
+        struggle.Speed = speed;
+    }
+
+    /// <summary>
     /// Per-tick upkeep: end conditions, DoT ticks, combat-mode enforcement.
     /// </summary>
     public override void Update(float frameTime)
@@ -392,6 +551,9 @@ public sealed partial class LatchSystem : SharedLatchSystem
 
             // Re-assert every tick so this can't be toggled back on mid-latch.
             _combatMode.SetInCombatMode(uid, false);
+
+            if (TryComp<LatchStruggleComponent>(target, out var struggle))
+                UpdateStruggle(target, struggle, comp, now);
 
             if (!comp.TickPaused && now >= comp.NextTickTime)
             {

@@ -109,6 +109,45 @@ public abstract partial class SharedLatchSystem : EntitySystem
     }
 
     /// <summary>
+    /// Struggle cursor position at the given time, unfolded over 0 to 2
+    /// (0 to 1 travelling right, 1 to 2 travelling back left).
+    /// </summary>
+    public static float GetStruggleUnfolded(LatchStruggleComponent struggle, TimeSpan time)
+    {
+        if (time <= struggle.SegmentStart)
+            return struggle.SegmentPosition;
+
+        var travelled = struggle.Speed * (float) (time - struggle.SegmentStart).TotalSeconds;
+        var unfolded = (struggle.SegmentPosition + travelled) % 2f;
+        return unfolded < 0f ? unfolded + 2f : unfolded;
+    }
+
+    /// <summary>
+    /// Struggle cursor position on the bar at the given time, 0 to 1.
+    /// </summary>
+    public static float GetStruggleCursor(LatchStruggleComponent struggle, TimeSpan time)
+    {
+        var unfolded = GetStruggleUnfolded(struggle, time);
+        return unfolded <= 1f ? unfolded : 2f - unfolded;
+    }
+
+    /// <summary>
+    /// Grades a cursor position against a zone: perfect in the middle, good on either side.
+    /// </summary>
+    public static LatchStruggleResult GradeStruggle(float cursor, float zoneCenter, float perfectWidth, float goodWidth)
+    {
+        var distance = MathF.Abs(cursor - zoneCenter);
+        var halfPerfect = perfectWidth / 2f;
+
+        if (distance <= halfPerfect)
+            return LatchStruggleResult.Perfect;
+
+        return distance <= halfPerfect + goodWidth
+            ? LatchStruggleResult.Good
+            : LatchStruggleResult.Miss;
+    }
+
+    /// <summary>
     /// The latch's blocked hand can't be dropped via the drop key.
     /// </summary>
     private void OnBlockedHandRemoveAttempt(EntityUid uid, LatchBlockedHandComponent comp, ref ContainerGettingRemovedAttemptEvent args)

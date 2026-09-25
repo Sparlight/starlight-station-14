@@ -133,6 +133,64 @@ public sealed partial class LatchComponent : Component
     public float StaminaDamagePerBite = 15f;
 
     /// <summary>
+    /// Seconds for the target's struggle cursor to cross the bar once.
+    /// </summary>
+    [DataField]
+    public float StruggleCrossingTime = 1f;
+
+    /// <summary>
+    /// Struggle cursor speed multiplier for a short time after each Bite Harder.
+    /// </summary>
+    [DataField]
+    public float StruggleFrenzySpeedMultiplier = 1.4f;
+
+    [DataField]
+    public TimeSpan StruggleFrenzyDuration = TimeSpan.FromSeconds(1);
+
+    /// <summary>
+    /// Width of the perfect zone, as a fraction of the bar.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float StrugglePerfectWidth = 0.12f;
+
+    /// <summary>
+    /// Width of the good zone on each side of the perfect zone, as a fraction of the bar.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float StruggleGoodWidth = 0.12f;
+
+    /// <summary>
+    /// Taken off both the remaining time and the hard cap, so Bite Harder
+    /// can refill the timer but can't undo struggle progress.
+    /// </summary>
+    [DataField]
+    public TimeSpan StrugglePerfectReduction = TimeSpan.FromSeconds(1.5);
+
+    [DataField]
+    public TimeSpan StruggleGoodReduction = TimeSpan.FromSeconds(0.75);
+
+    /// <summary>
+    /// Time from a press until the next attempt's cursor starts moving.
+    /// Also gives the new zone time to reach the client first.
+    /// </summary>
+    [DataField]
+    public TimeSpan StruggleCooldown = TimeSpan.FromSeconds(0.5);
+
+    /// <summary>
+    /// How much of <see cref="StruggleCooldown"/> shows the press result
+    /// before the next attempt's zone appears.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan StruggleResultDisplay = TimeSpan.FromSeconds(0.25);
+
+    /// <summary>
+    /// Lowest allowed zone centre, so there's always a moment to see the new
+    /// zone before the cursor (which starts at the left edge) reaches it.
+    /// </summary>
+    [DataField]
+    public float StruggleMinZoneCenter = 0.25f;
+
+    /// <summary>
     /// How frequently the latch should apply 'ticks', mostly used
     /// for ticking damage onto the latch target.
     /// </summary>
