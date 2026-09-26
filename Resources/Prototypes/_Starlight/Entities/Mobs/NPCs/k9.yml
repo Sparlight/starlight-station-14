@@ -114,6 +114,9 @@
     duration: 3
     zoomiesAlert: K9Sprint
   - type: Latch
+    struggleWhitelist:
+      components:
+      - Pacified
     damagePerTick:
       types:
         Piercing: 1.5

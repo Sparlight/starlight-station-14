@@ -245,7 +245,9 @@ public sealed partial class LatchUIController : UIController
                     _entities.TryGetComponent<LatchComponent>(latchedComp.Latcher, out var latcherComp) &&
                     latcherComp.Active)
         {
-            instruction = Loc.GetString("latch-instruction-latchtarget");
+            instruction = _entities.HasComponent<LatchStruggleComponent>(local)
+                ? Loc.GetString("latch-instruction-latchtarget-struggle")
+                : Loc.GetString("latch-instruction-latchtarget");
             endTime = latcherComp.EndTime;
             maxEndTime = latcherComp.MaxEndTime;
             maxDuration = latcherComp.MaxDuration;

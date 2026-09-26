@@ -52,6 +52,13 @@ public sealed partial class LatchComponent : Component
     public EntityWhitelist? Whitelist;
 
     /// <summary>
+    /// Targets matching this get the struggle minigame. Checked once at latch
+    /// start. Null means every target gets it. Doesn't affect who can be latched.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? StruggleWhitelist;
+
+    /// <summary>
     /// Distance a latch breaks at if exceeded mid-latch. Independent of the
     /// action's own engage range (TargetAction.range on the Latch prototype).
     /// </summary>

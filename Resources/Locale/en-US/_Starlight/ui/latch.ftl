@@ -5,8 +5,9 @@ latch-bite-harder-button = Bite Harder
 
 latch-instruction-latcher = Bite harder to deal more damage
     and extend the latch duration!
-latch-instruction-latchtarget = Harm the latcher or struggle
+latch-instruction-latchtarget = Harm the latcher
     to break free faster!
+latch-instruction-latchtarget-struggle = Struggle to break free faster!
 
 latch-struggle-button = Struggle
 latch-struggle-hint = Struggle when the line hits the light zone!

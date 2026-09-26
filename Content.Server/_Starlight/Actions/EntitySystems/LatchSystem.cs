@@ -21,6 +21,7 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
+using Content.Shared.Whitelist;
 using Content.Shared.Wieldable;
 using Robust.Server.Audio;
 using Robust.Shared.Physics.Systems;
@@ -52,6 +53,7 @@ public sealed partial class LatchSystem : SharedLatchSystem
     [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private SharedWieldableSystem _wieldable = default!;
     [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
 
     // Subtle relative to explosions (which scale up to ~0.4f) - a jolt, not a blast.
     private const float BiteHarderCameraKick = 0.15f;
@@ -206,12 +208,16 @@ public sealed partial class LatchSystem : SharedLatchSystem
         latched.Latcher = uid;
         Dirty(target, latched);
 
-        var struggle = EnsureComp<LatchStruggleComponent>(target);
-        struggle.Block = LatchStruggleBlock.None;
-        struggle.LastResult = LatchStruggleResult.None;
-        struggle.FrenzyEndTime = TimeSpan.Zero;
-        StartStruggleAttempt(comp, struggle, Timing.CurTime + comp.StruggleCooldown, Timing.CurTime);
-        Dirty(target, struggle);
+        // Only some targets get the struggle minigame; everything else about the latch is the same.
+        if (_entityWhitelist.IsWhitelistPassOrNull(comp.StruggleWhitelist, target))
+        {
+            var struggle = EnsureComp<LatchStruggleComponent>(target);
+            struggle.Block = LatchStruggleBlock.None;
+            struggle.LastResult = LatchStruggleResult.None;
+            struggle.FrenzyEndTime = TimeSpan.Zero;
+            StartStruggleAttempt(comp, struggle, Timing.CurTime + comp.StruggleCooldown, Timing.CurTime);
+            Dirty(target, struggle);
+        }
 
         var toLatcher = _transform.GetWorldPosition(uid) - _transform.GetWorldPosition(target);
         var withinObscureRange = MathF.Abs(toLatcher.Y) <= comp.UiObscureNorthRange
