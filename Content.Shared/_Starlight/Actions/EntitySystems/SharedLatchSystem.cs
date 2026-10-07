@@ -3,6 +3,7 @@ using Content.Shared._Starlight.Actions.Events;
 using Content.Shared.Gravity;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Whitelist;
@@ -25,6 +26,7 @@ public abstract partial class SharedLatchSystem : EntitySystem
 
         SubscribeLocalEvent<LatchComponent, RefreshMovementSpeedModifiersEvent>(OnLatcherRefreshMovementSpeed);
         SubscribeLocalEvent<LatchedComponent, RefreshMovementSpeedModifiersEvent>(OnTargetRefreshMovementSpeed);
+        SubscribeLocalEvent<LatchedComponent, UpdateCanMoveEvent>(OnTargetUpdateCanMove);
         SubscribeLocalEvent<LatchComponent, RefreshWeightlessModifiersEvent>(OnLatcherRefreshWeightless);
         SubscribeLocalEvent<LatchedComponent, RefreshWeightlessModifiersEvent>(OnTargetRefreshWeightless);
         SubscribeLocalEvent<LatchComponent, IsWeightlessEvent>(OnLatcherIsWeightless);
@@ -161,6 +163,13 @@ public abstract partial class SharedLatchSystem : EntitySystem
 
     private void OnTargetRefreshMovementSpeed(EntityUid uid, LatchedComponent comp, RefreshMovementSpeedModifiersEvent ev)
         => ev.ModifySpeed(comp.SpeedMultiplier);
+
+    // MovementSpeedModifierScale rescales a 0 modifier, so pinning blocks movement directly.
+    private void OnTargetUpdateCanMove(EntityUid uid, LatchedComponent comp, UpdateCanMoveEvent args)
+    {
+        if (comp.SpeedMultiplier <= 0f)
+            args.Cancel();
+    }
 
     // Weightless movement reads WeightlessModifier, not the walk/sprint modifiers,
     // so the latch has to apply its speed changes here too.

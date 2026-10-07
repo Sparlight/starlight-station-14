@@ -4,6 +4,7 @@ using Content.Server.CombatMode;
 using Content.Shared._Starlight.Actions.Components;
 using Content.Shared._Starlight.Actions.EntitySystems;
 using Content.Shared._Starlight.Actions.Events;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Camera;
@@ -38,6 +39,7 @@ namespace Content.Server._Starlight.Actions.EntitySystems;
 public sealed partial class LatchSystem : SharedLatchSystem
 {
     [Dependency] private ActionsSystem _action = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private AlertsSystem _alert = default!;
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
@@ -211,6 +213,7 @@ public sealed partial class LatchSystem : SharedLatchSystem
         latched.Latcher = uid;
         latched.SpeedMultiplier = slowed ? comp.SlowSpeedMultiplier : 0f;
         Dirty(target, latched);
+        _blocker.UpdateCanMove(target);
 
         comp.LatcherWeightless = IsFloatingTarget(target);
 
@@ -339,6 +342,7 @@ public sealed partial class LatchSystem : SharedLatchSystem
         {
             RemComp<LatchStruggleComponent>(targetUid);
             RemComp<LatchedComponent>(targetUid);
+            _blocker.UpdateCanMove(targetUid);
             _alert.ClearAlert(targetUid, comp.LatchAlert);
             _speed.RefreshMovementSpeedModifiers(targetUid);
             _speed.RefreshWeightlessModifiers(targetUid);
