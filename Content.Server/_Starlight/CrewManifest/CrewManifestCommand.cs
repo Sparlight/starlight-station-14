@@ -8,6 +8,7 @@ using Content.Shared.Administration;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.PDA;
 using Content.Shared.Roles;
 using Content.Shared.StationRecords;
@@ -30,6 +31,7 @@ public sealed partial class CrewManifestCommand : ToolshedCommand
     private MindSystem? _mind;
     private ContainerSystem? _container;
     private InventorySystem? _inventory;
+    private NameModifierSystem? _nameModifier;
     private static readonly ProtoId<JobPrototype> _assistantPrototypeId = "Assistant";
 
     [CommandImplementation("addto")]
@@ -115,7 +117,8 @@ public sealed partial class CrewManifestCommand : ToolshedCommand
         TryComp<HumanoidAppearanceComponent>(player, out var humanoid);
         TryComp<FingerprintComponent>(player, out var fingerprint);
         TryComp<DnaComponent>(player, out var dna);
-        var name = MetaData(player).EntityName;
+        _nameModifier ??= EntitySystemManager.GetEntitySystem<NameModifierSystem>();
+        var name = _nameModifier.GetBaseName(player); // Records don't include name modifiers like "(739)".
         var age = humanoid?.Age ?? 0;
         var gender = humanoid?.Gender ?? Gender.Epicene;
         var species = !string.IsNullOrEmpty(humanoid?.CustomSpecieName)
@@ -129,7 +132,8 @@ public sealed partial class CrewManifestCommand : ToolshedCommand
     {
         _records ??= EntitySystemManager.GetEntitySystem<StationRecordsSystem>();
         if (!TryComp<StationRecordsComponent>(station, out var records)) return;
-        if (_records.GetRecordByName(station, MetaData(player).EntityName, records) is not { } id) return;
+        _nameModifier ??= EntitySystemManager.GetEntitySystem<NameModifierSystem>();
+        if (_records.GetRecordByName(station, _nameModifier.GetBaseName(player), records) is not { } id) return;
         var key = new StationRecordKey(id, station);
         _records.RemoveRecord(key, records);
     }

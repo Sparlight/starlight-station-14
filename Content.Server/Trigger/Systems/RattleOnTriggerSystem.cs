@@ -13,6 +13,7 @@ using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Destructible;
+using Content.Shared.NameModifier.EntitySystems; // Starlight
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -29,6 +30,7 @@ public sealed partial class RattleOnTriggerSystem : EntitySystem
     [Dependency] private StationRecordsSystem _recordsSystem = default!;
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private StationSystem _station = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
     #endregion
 
     public override void Initialize()
@@ -70,7 +72,8 @@ public sealed partial class RattleOnTriggerSystem : EntitySystem
 
         if (TryComp<StationRecordsComponent>(station, out var stationRecords))
         {
-            var recordId = _recordsSystem.GetRecordByName(station.Value, MetaData(target.Value).EntityName);
+            // Records don't include name modifiers like a name identifier's "(739)".
+            var recordId = _recordsSystem.GetRecordByName(station.Value, _nameModifier.GetBaseName(target.Value));
             if (recordId != null)
             {
                 var key = new StationRecordKey(recordId.Value, station.Value);
