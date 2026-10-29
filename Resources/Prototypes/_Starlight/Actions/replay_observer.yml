@@ -43,6 +43,18 @@
   - type: InstantAction
     event: !type:ReplayToggleWeatherActionEvent
 
+- type: entity
+  parent: BaseMentalAction
+  id: ActionReplayShuttlePilots
+  name: Shuttle Pilots
+  description: Show who is flying each shuttle, from which console, and which keys they hold.
+  components:
+  - type: Action
+    icon: { sprite: _Starlight/Interface/Actions/actions_replay.rsi, state: shuttle_pilots }
+    clientExclusive: true
+  - type: InstantAction
+    event: !type:ReplayShowShuttlePilotsActionEvent
+
 # Component set added to the replay observer by the status icons action. Never spawned.
 - type: entity
   id: ReplayObserverStatusHud

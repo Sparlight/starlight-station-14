@@ -67,6 +67,7 @@ public sealed partial class ReplayObserverSystem : EntitySystem
         SubscribeLocalEvent<ReplaySpectatorComponent, ReplayTogglePlayerOverlayActionEvent>(OnTogglePlayerOverlay);
         SubscribeLocalEvent<ReplaySpectatorComponent, ReplayToggleStatusIconsActionEvent>(OnToggleStatusIcons);
         SubscribeLocalEvent<ReplaySpectatorComponent, ReplayToggleWeatherActionEvent>(OnToggleWeather);
+        SubscribeLocalEvent<ReplaySpectatorComponent, ReplayShowShuttlePilotsActionEvent>(OnShowShuttlePilots);
 
         _replayPlayback.ReplayPlaybackStarted += OnPlaybackStarted;
         _replayPlayback.ReplayPlaybackStopped += OnPlaybackStopped;
@@ -122,6 +123,7 @@ public sealed partial class ReplayObserverSystem : EntitySystem
         _refollowOldEye = null;
         _radarAccumulator = 0f;
         CloseSolutionWindows();
+        CloseShuttlePilots();
     }
 
     private void OnAttached(EntityUid uid, ReplaySpectatorComponent component, LocalPlayerAttachedEvent args)
@@ -157,6 +159,7 @@ public sealed partial class ReplayObserverSystem : EntitySystem
         UpdateRadar(frameTime);
         UpdateRefollow();
         UpdateSolutionWindows(frameTime);
+        UpdateShuttlePilots(frameTime);
         UpdateMutedSounds();
         UpdateAudioAudiences();
     }
@@ -203,6 +206,7 @@ public sealed partial class ReplayObserverSystem : EntitySystem
         _statusIconsShown = false; // A fresh observer has none of the HUD components yet.
 
         AddWeatherAction(uid);
+        AddShuttlePilotsAction(uid);
 
         ApplyViewSettings(uid);
         _ghost.ToggleGhostVisibility(_ghostsVisible);

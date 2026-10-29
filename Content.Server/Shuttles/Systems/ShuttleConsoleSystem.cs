@@ -472,6 +472,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         ActionBlockerSystem.UpdateCanMove(entity);
         pilotComponent.Position = Comp<TransformComponent>(entity).Coordinates;
         Dirty(entity, pilotComponent);
+        LogPilotChange(entity, uid, started: true); // Starlight
     }
 
     public void RemovePilot(EntityUid pilotUid, PilotComponent pilotComponent)
@@ -487,6 +488,8 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
 
         if (!helm.SubscribedPilots.Remove(pilotUid))
             return;
+
+        LogPilotChange(pilotUid, console!.Value, started: false); // Starlight
 
         _alertsSystem.ClearAlert(pilotUid, pilotComponent.PilotingAlert);
 
